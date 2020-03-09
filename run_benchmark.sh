@@ -16,9 +16,8 @@ NCNN_ROOT="$FRAMEWORKS_DIR/ncnn/"
 MACE_ROOT="$FRAMEWORKS_DIR/mace/"
 PADDLELITE_ROOT="$FRAMEWORKS_DIR/Paddle-Lite/"
 # TFLite models from https://www.tensorflow.org/lite/guide/hosted_models
-# only include models that all framework can support:
 # MobileNet V1 1.0 224 - float + quantized
-# MobileNet V2 1.0 224 - float + quantized
+# MobileNet V2 1.0 224 - float
 MODEL_DIR="$SCRIPT_DIR/models/"
 TFLite_MODEL_DIR="$MODEL_DIR/tflite"
 # MNN models are directly converted from TFLite models
@@ -55,12 +54,13 @@ echo "Framework,$MODELS" | tr ' ' ',' > $OVERVIEW_LOG
 #   git clone https://github.com/tensorflow/tensorflow.git $TF_ROOT
 # fi 
 # cd $TF_ROOT
-# git checkout master
-# git pull
-# bazel clean
-# bazel build -c opt \
-#   --config=android_arm64 \
-#   tensorflow/lite/tools/benchmark:benchmark_model
+# # git checkout master
+# # git pull
+# #bazel clean
+# # bazel build -c opt \
+# #   --config=android_arm64 \
+# #   tensorflow/lite/tools/benchmark:benchmark_model
+# #adb push /Users/weiwe/Desktop/project-src/tensorflow/bazel-bin/tensorflow/lite/tools/benchmark/benchmark_model /data/local/tmp
 # adb push bazel-bin/tensorflow/lite/tools/benchmark/benchmark_model /data/local/tmp
 # adb push $TFLite_MODEL_DIR/*.tflite /data/local/tmp
 # rm -rf $TMP_DIR/*.log
@@ -71,12 +71,23 @@ echo "Framework,$MODELS" | tr ' ' ',' > $OVERVIEW_LOG
 #   adb shell /data/local/tmp/benchmark_model \
 #   --graph=/data/local/tmp/$i.tflite \
 #   --num_threads=$RUN_THREADS --num_runs=$RUN_LOOP > $TMP_DIR/tflite.log
-#   grep 'Average inference timings in us' $SCRIPT_DIR/*.log | awk '{print $NF/1000}' | tr '\n' ',' >> $OVERVIEW_LOG
+#   grep 'Average inference timings in us' $TMP_DIR/tflite.log | awk '{print $NF/1000}' | tr '\n' ',' >> $OVERVIEW_LOG
+# done
+# echo >> $OVERVIEW_LOG
+
+# echo -n "TFLite-XNNPACK(`git rev-parse --short HEAD`),0," >> $OVERVIEW_LOG
+# for i in `echo $MODELS | sed s/mobilenet.*quant//g`; 
+# do
+#   echo $i
+#   adb shell /data/local/tmp/benchmark_model \
+#   --graph=/data/local/tmp/$i.tflite \
+#   --num_threads=$RUN_THREADS --num_runs=$RUN_LOOP --use_xnnpack=true > $TMP_DIR/tflite.log
+#   grep 'Average inference timings in us' $TMP_DIR/tflite.log | awk '{print $NF/1000}' | tr '\n' ',' >> $OVERVIEW_LOG
 # done
 # echo >> $OVERVIEW_LOG
 
 # # do MNN benchmarks
-# Require flatbuf 'flatc' be in PATH
+# # Require flatbuf 'flatc' be in PATH
 # if [ ! -d $MNN_ROOT ] 
 # then 
 #   git clone https://github.com/alibaba/MNN.git $MNN_ROOT
@@ -88,10 +99,12 @@ echo "Framework,$MODELS" | tr ' ' ',' > $OVERVIEW_LOG
 # git checkout master
 # git pull
 # sed -i '.bak' s%^BENCHMARK_MODEL_DIR.*%BENCHMARK_MODEL_DIR=$MNN_MODEL_DIR%g bench_android.sh
+# sed -i '.bak' s%^ABI=.*%ABI=\"arm64-v8a\"%g bench_android.sh
 # sed -i '.bak' s%^VULKAN=.*%VULKAN=\"OFF\"%g bench_android.sh   
 # sed -i '.bak' s%^OPENCL=.*%OPENCL=\"OFF\"%g bench_android.sh
 # sed -i '.bak' s%^OPENGL=.*%OPENGL=\"OFF\"%g bench_android.sh
-# sed -i '.bak' s%RUN_LOOP=.*%RUN_LOOP=50%g bench_android.sh
+# # MNN by default uses 4 threads
+# sed -i '.bak' s%RUN_LOOP=.*%RUN_LOOP=$RUN_LOOP%g bench_android.sh
 # #disable Vulkan runs
 # sed -i '.bak' '/RUN_LOOP 7 2/d' bench_android.sh
 # ./bench_android.sh -64 -p
@@ -131,65 +144,65 @@ export NDK_ROOT=$ANDROID_NDK_HOME
 BAZEL_VERSION="0.12.0"
 # *** UPDATE NDK FOLDER ***
 
-# # do MACE benchmark
-# if [ ! -d $MACE_ROOT ] 
-# then 
-#   git clone https://github.com/PaddlePaddle/Paddle-Lite.git $MACE_ROOT
-# fi 
-# cd $MACE_ROOT
-# git reset --hard
-# #git clean -xdf
-# git checkout master
-# git pull
-# RUNTIME=CPU bash tools/cmake/cmake-build-arm64-v8a.sh
-# touch $TMP_DIR/mace.log
-# rm $TMP_DIR/mace.log
-# echo -n "MACE(`git rev-parse --short HEAD`)," >> $OVERVIEW_LOG
-# cp -R $MACE_MODEL_DIR/build/* ./build/
-# for i in `echo $MODELS`; do
-#   #USE_BAZEL_VERSION=$BAZEL_VERSION python tools/python/convert.py --config $MACE_MODEL_DIR/$i.yml
-#   USE_BAZEL_VERSION=$BAZEL_VERSION python tools/python/run_model.py  \
-#     --config $MACE_MODEL_DIR/$i.yml   \
-#     --benchmark   \
-#     --target_abi=arm64-v8a   \
-#     --omp_num_threads=$RUN_THREADS   \
-#     --round=$RUN_LOOP   \
-#     --runtime=cpu > $TMP_DIR/mace.log
-#   grep -A 4 "Summary of Ops' Stat" $TMP_DIR/mace.log | tail -1 | cut -d\| -f 7 | tr '\n' ',' >> $OVERVIEW_LOG
-# done
-# echo >> $OVERVIEW_LOG
-
-# *** override cmake due to a bug ***
-# https://github.com/PaddlePaddle/Paddle-Lite/issues/2950
-export PATH=/Users/weiwe/Utils/cmake-3.10.3-Darwin-x86_64/CMake.app/Contents/bin:$PATH
-
-# do Paddle-Lite benchmark
-if [ ! -d $PADDLELITE_ROOT ] 
+# do MACE benchmark
+if [ ! -d $MACE_ROOT ] 
 then 
-  git clone https://github.com/PaddlePaddle/Paddle-Lite.git $PADDLELITE_ROOT
+  git clone https://github.com/PaddlePaddle/Paddle-Lite.git $MACE_ROOT
 fi 
-cd $PADDLELITE_ROOT
+cd $MACE_ROOT
 git reset --hard
-git clean -xdf
+#git clean -xdf
 git checkout master
 git pull
-./lite/tools/ci_build.sh  \
-  --arm_os="android" \
-  --arm_abi="armv8" \
-  --arm_lang="gcc "  \
-  build_arm
-wget -c https://paddle-inference-dist.bj.bcebos.com/PaddleLite/benchmark_0/benchmark.sh
-sed -i '.bak' "s/^NUM_THREADS_LIST=.*/NUM_THREADS_LIST=($RUN_THREADS)/g" benchmark.sh
-sed -i '.bak' "s/^REPEATS=.*/REPEATS=$RUN_LOOP/g" benchmark.sh
-touch ./benchmark_models
-rm -rf ./benchmark_models
-cp -R $PADDLELITE_MODEL_DIR ./benchmark_models
-cp build.lite.android.armv8.gcc/lite/api/benchmark_bin .
-sh ./benchmark.sh ./benchmark_bin  \
-  ./benchmark_models paddle-lite.log true | tee $TMP_DIR/paddle-lite.log
-echo -n "Paddle-Lite(`git rev-parse --short HEAD`),0," >> $OVERVIEW_LOG
-grep 'min.*max.*average' $TMP_DIR/paddle-lite.log | awk '{print $NF}' | tr '\n' ',' >> $OVERVIEW_LOG
+RUNTIME=CPU bash tools/cmake/cmake-build-arm64-v8a.sh
+touch $TMP_DIR/mace.log
+rm $TMP_DIR/mace.log
+echo -n "MACE(`git rev-parse --short HEAD`)," >> $OVERVIEW_LOG
+cp -R $MACE_MODEL_DIR/build/* ./build/
+for i in `echo $MODELS`; do
+  #USE_BAZEL_VERSION=$BAZEL_VERSION python tools/python/convert.py --config $MACE_MODEL_DIR/$i.yml
+  USE_BAZEL_VERSION=$BAZEL_VERSION python tools/python/run_model.py  \
+    --config $MACE_MODEL_DIR/$i.yml   \
+    --benchmark   \
+    --target_abi=arm64-v8a   \
+    --omp_num_threads=$RUN_THREADS   \
+    --round=$RUN_LOOP   \
+    --runtime=cpu > $TMP_DIR/mace.log
+  grep -A 4 "Summary of Ops' Stat" $TMP_DIR/mace.log | tail -1 | cut -d\| -f 7 | tr '\n' ',' >> $OVERVIEW_LOG
+done
 echo >> $OVERVIEW_LOG
+
+# # *** override cmake due to a bug ***
+# # https://github.com/PaddlePaddle/Paddle-Lite/issues/2950
+# export PATH=/Users/weiwe/Utils/cmake-3.10.3-Darwin-x86_64/CMake.app/Contents/bin:$PATH
+
+# # do Paddle-Lite benchmark
+# if [ ! -d $PADDLELITE_ROOT ] 
+# then 
+#   git clone https://github.com/PaddlePaddle/Paddle-Lite.git $PADDLELITE_ROOT
+# fi 
+# cd $PADDLELITE_ROOT
+# git reset --hard
+# git clean -xdf
+# git checkout develop
+# git pull
+# # strangly it errors out if compiled twice
+# ./lite/tools/ci_build.sh  \
+#   --arm_os="android" \
+#   --arm_abi="armv8" \
+#   --arm_lang="clang "  \
+#   build_arm
+# wget -c https://paddle-inference-dist.bj.bcebos.com/PaddleLite/benchmark_0/benchmark.sh
+# sed -i '.bak' "s/^NUM_THREADS_LIST=.*/NUM_THREADS_LIST=($RUN_THREADS)/g" benchmark.sh
+# sed -i '.bak' "s/^REPEATS=.*/REPEATS=$RUN_LOOP/g" benchmark.sh
+# cp -R $PADDLELITE_MODEL_DIR ./benchmark_models
+# cp build.lite.android.armv8.clang/lite/api/benchmark_bin .
+# sh ./benchmark.sh ./benchmark_bin  \
+#   ./benchmark_models paddle-lite.log true | tee $TMP_DIR/paddle-lite.log
+# # No quantized mobilenet v1 model yet
+# echo -n "Paddle-Lite(`git rev-parse --short HEAD`),0," >> $OVERVIEW_LOG
+# grep 'min.*max.*average' $TMP_DIR/paddle-lite.log | awk '{print $NF}' | tr '\n' ',' >> $OVERVIEW_LOG
+# echo >> $OVERVIEW_LOG
 
 # do a final cleanup
 sed -i '.bak' 's/,$//g' $OVERVIEW_LOG
