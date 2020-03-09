@@ -1,0 +1,1947 @@
+op {
+  input: "input"
+  input: "MobilenetV1/Conv2d_0/weights:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_0/Conv2D_bn_offset:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_0/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_0/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 2
+    ints: 2
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 112
+    dims: 112
+    dims: 32
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_0/Relu6:0"
+  input: "MobilenetV1/Conv2d_1_depthwise/depthwise_weights:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/depthwise_bn_offset:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/Relu6"
+  type: "DepthwiseConv2d"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 112
+    dims: 112
+    dims: 32
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_1_pointwise/weights:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/Conv2D_bn_offset:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 112
+    dims: 112
+    dims: 64
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_2_depthwise/depthwise_weights:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/depthwise_bn_offset:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/Relu6"
+  type: "DepthwiseConv2d"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 2
+    ints: 2
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 56
+    dims: 56
+    dims: 64
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_2_pointwise/weights:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/Conv2D_bn_offset:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 56
+    dims: 56
+    dims: 128
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_3_depthwise/depthwise_weights:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/depthwise_bn_offset:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/Relu6"
+  type: "DepthwiseConv2d"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 56
+    dims: 56
+    dims: 128
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_3_pointwise/weights:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/Conv2D_bn_offset:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 56
+    dims: 56
+    dims: 128
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_4_depthwise/depthwise_weights:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/depthwise_bn_offset:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/Relu6"
+  type: "DepthwiseConv2d"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 2
+    ints: 2
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 28
+    dims: 28
+    dims: 128
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_4_pointwise/weights:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/Conv2D_bn_offset:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 28
+    dims: 28
+    dims: 256
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_5_depthwise/depthwise_weights:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/depthwise_bn_offset:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/Relu6"
+  type: "DepthwiseConv2d"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 28
+    dims: 28
+    dims: 256
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_5_pointwise/weights:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/Conv2D_bn_offset:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 28
+    dims: 28
+    dims: 256
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_6_depthwise/depthwise_weights:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/depthwise_bn_offset:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/Relu6"
+  type: "DepthwiseConv2d"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 2
+    ints: 2
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 14
+    dims: 14
+    dims: 256
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_6_pointwise/weights:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/Conv2D_bn_offset:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 14
+    dims: 14
+    dims: 512
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_7_depthwise/depthwise_weights:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/depthwise_bn_offset:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/Relu6"
+  type: "DepthwiseConv2d"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 14
+    dims: 14
+    dims: 512
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_7_pointwise/weights:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/Conv2D_bn_offset:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 14
+    dims: 14
+    dims: 512
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_8_depthwise/depthwise_weights:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/depthwise_bn_offset:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/Relu6"
+  type: "DepthwiseConv2d"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 14
+    dims: 14
+    dims: 512
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_8_pointwise/weights:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/Conv2D_bn_offset:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 14
+    dims: 14
+    dims: 512
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_9_depthwise/depthwise_weights:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/depthwise_bn_offset:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/Relu6"
+  type: "DepthwiseConv2d"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 14
+    dims: 14
+    dims: 512
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_9_pointwise/weights:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/Conv2D_bn_offset:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 14
+    dims: 14
+    dims: 512
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_10_depthwise/depthwise_weights:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/depthwise_bn_offset:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/Relu6"
+  type: "DepthwiseConv2d"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 14
+    dims: 14
+    dims: 512
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_10_pointwise/weights:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/Conv2D_bn_offset:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 14
+    dims: 14
+    dims: 512
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_11_depthwise/depthwise_weights:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/depthwise_bn_offset:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/Relu6"
+  type: "DepthwiseConv2d"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 14
+    dims: 14
+    dims: 512
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_11_pointwise/weights:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/Conv2D_bn_offset:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 14
+    dims: 14
+    dims: 512
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_12_depthwise/depthwise_weights:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/depthwise_bn_offset:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/Relu6"
+  type: "DepthwiseConv2d"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 2
+    ints: 2
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 7
+    dims: 7
+    dims: 512
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_12_pointwise/weights:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/Conv2D_bn_offset:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 7
+    dims: 7
+    dims: 1024
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_13_depthwise/depthwise_weights:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/depthwise_bn_offset:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/Relu6"
+  type: "DepthwiseConv2d"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 7
+    dims: 7
+    dims: 1024
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_13_pointwise/weights:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/Conv2D_bn_offset:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 7
+    dims: 7
+    dims: 1024
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/Relu6:0"
+  output: "MobilenetV1/Logits/AvgPool_1a/AvgPool:0"
+  name: "MobilenetV1/Logits/AvgPool_1a/AvgPool"
+  type: "Pooling"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "pooling_type"
+    i: 1
+  }
+  arg {
+    name: "padding"
+    i: 0
+  }
+  arg {
+    name: "strides"
+    ints: 2
+    ints: 2
+  }
+  arg {
+    name: "kernels"
+    ints: 7
+    ints: 7
+  }
+  output_shape {
+    dims: 1
+    dims: 1
+    dims: 1
+    dims: 1024
+  }
+}
+op {
+  input: "MobilenetV1/Logits/AvgPool_1a/AvgPool:0"
+  input: "MobilenetV1/Logits/Conv2d_1c_1x1/weights:0"
+  input: "MobilenetV1/Logits/Conv2d_1c_1x1/biases:0"
+  output: "MobilenetV1/Logits/Conv2d_1c_1x1/BiasAdd:0"
+  name: "MobilenetV1/Logits/Conv2d_1c_1x1/BiasAdd"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  output_shape {
+    dims: 1
+    dims: 1
+    dims: 1
+    dims: 1001
+  }
+}
+op {
+  input: "MobilenetV1/Logits/Conv2d_1c_1x1/BiasAdd:0"
+  output: "MobilenetV1/Logits/SpatialSqueeze:0"
+  name: "MobilenetV1/Logits/SpatialSqueeze"
+  type: "Squeeze"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "axis"
+    ints: 1
+    ints: 2
+  }
+  arg {
+    name: "has_data_format"
+    i: 1
+  }
+  output_shape {
+    dims: 1
+    dims: 1001
+  }
+}
+op {
+  input: "MobilenetV1/Logits/SpatialSqueeze:0"
+  output: "MobilenetV1/Predictions/Reshape_1"
+  name: "MobilenetV1/Predictions/Softmax"
+  type: "Softmax"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "has_data_format"
+    i: 1
+  }
+  output_shape {
+    dims: 1
+    dims: 1001
+  }
+}
+arg {
+  name: "filter_format"
+  i: 101
+}
+arg {
+  name: "data_format"
+  i: 1
+}
+arg {
+  name: "opencl_mem_type"
+  i: 2
+}
+tensors {
+  dims: 2
+  data_type: DT_INT32
+  name: "MobilenetV1/Predictions/Reshape/shape:0"
+  offset: 0
+  data_size: 2
+}
+tensors {
+  dims: 1001
+  data_type: DT_HALF
+  name: "MobilenetV1/Logits/Conv2d_1c_1x1/biases:0"
+  offset: 8
+  data_size: 1001
+}
+tensors {
+  dims: 1001
+  dims: 1024
+  dims: 1
+  dims: 1
+  data_type: DT_HALF
+  name: "MobilenetV1/Logits/Conv2d_1c_1x1/weights:0"
+  offset: 2012
+  data_size: 1025024
+}
+tensors {
+  dims: 1024
+  data_type: DT_HALF
+  name: "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/Conv2D_bn_offset:0"
+  offset: 2052060
+  data_size: 1024
+}
+tensors {
+  dims: 1024
+  dims: 1024
+  dims: 1
+  dims: 1
+  data_type: DT_HALF
+  name: "MobilenetV1/Conv2d_13_pointwise/weights:0"
+  offset: 2054108
+  data_size: 1048576
+}
+tensors {
+  dims: 1024
+  data_type: DT_HALF
+  name: "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/depthwise_bn_offset:0"
+  offset: 4151260
+  data_size: 1024
+}
+tensors {
+  dims: 1
+  dims: 1024
+  dims: 3
+  dims: 3
+  data_type: DT_HALF
+  name: "MobilenetV1/Conv2d_13_depthwise/depthwise_weights:0"
+  offset: 4153308
+  data_size: 9216
+}
+tensors {
+  dims: 1024
+  data_type: DT_HALF
+  name: "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/Conv2D_bn_offset:0"
+  offset: 4171740
+  data_size: 1024
+}
+tensors {
+  dims: 1024
+  dims: 512
+  dims: 1
+  dims: 1
+  data_type: DT_HALF
+  name: "MobilenetV1/Conv2d_12_pointwise/weights:0"
+  offset: 4173788
+  data_size: 524288
+}
+tensors {
+  dims: 512
+  data_type: DT_HALF
+  name: "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/depthwise_bn_offset:0"
+  offset: 5222364
+  data_size: 512
+}
+tensors {
+  dims: 1
+  dims: 512
+  dims: 3
+  dims: 3
+  data_type: DT_HALF
+  name: "MobilenetV1/Conv2d_12_depthwise/depthwise_weights:0"
+  offset: 5223388
+  data_size: 4608
+}
+tensors {
+  dims: 512
+  data_type: DT_HALF
+  name: "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/Conv2D_bn_offset:0"
+  offset: 5232604
+  data_size: 512
+}
+tensors {
+  dims: 512
+  dims: 512
+  dims: 1
+  dims: 1
+  data_type: DT_HALF
+  name: "MobilenetV1/Conv2d_11_pointwise/weights:0"
+  offset: 5233628
+  data_size: 262144
+}
+tensors {
+  dims: 512
+  data_type: DT_HALF
+  name: "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/depthwise_bn_offset:0"
+  offset: 5757916
+  data_size: 512
+}
+tensors {
+  dims: 1
+  dims: 512
+  dims: 3
+  dims: 3
+  data_type: DT_HALF
+  name: "MobilenetV1/Conv2d_11_depthwise/depthwise_weights:0"
+  offset: 5758940
+  data_size: 4608
+}
+tensors {
+  dims: 512
+  data_type: DT_HALF
+  name: "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/Conv2D_bn_offset:0"
+  offset: 5768156
+  data_size: 512
+}
+tensors {
+  dims: 512
+  dims: 512
+  dims: 1
+  dims: 1
+  data_type: DT_HALF
+  name: "MobilenetV1/Conv2d_10_pointwise/weights:0"
+  offset: 5769180
+  data_size: 262144
+}
+tensors {
+  dims: 512
+  data_type: DT_HALF
+  name: "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/depthwise_bn_offset:0"
+  offset: 6293468
+  data_size: 512
+}
+tensors {
+  dims: 1
+  dims: 512
+  dims: 3
+  dims: 3
+  data_type: DT_HALF
+  name: "MobilenetV1/Conv2d_10_depthwise/depthwise_weights:0"
+  offset: 6294492
+  data_size: 4608
+}
+tensors {
+  dims: 512
+  data_type: DT_HALF
+  name: "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/Conv2D_bn_offset:0"
+  offset: 6303708
+  data_size: 512
+}
+tensors {
+  dims: 512
+  dims: 512
+  dims: 1
+  dims: 1
+  data_type: DT_HALF
+  name: "MobilenetV1/Conv2d_9_pointwise/weights:0"
+  offset: 6304732
+  data_size: 262144
+}
+tensors {
+  dims: 512
+  data_type: DT_HALF
+  name: "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/depthwise_bn_offset:0"
+  offset: 6829020
+  data_size: 512
+}
+tensors {
+  dims: 1
+  dims: 512
+  dims: 3
+  dims: 3
+  data_type: DT_HALF
+  name: "MobilenetV1/Conv2d_9_depthwise/depthwise_weights:0"
+  offset: 6830044
+  data_size: 4608
+}
+tensors {
+  dims: 512
+  data_type: DT_HALF
+  name: "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/Conv2D_bn_offset:0"
+  offset: 6839260
+  data_size: 512
+}
+tensors {
+  dims: 512
+  dims: 512
+  dims: 1
+  dims: 1
+  data_type: DT_HALF
+  name: "MobilenetV1/Conv2d_8_pointwise/weights:0"
+  offset: 6840284
+  data_size: 262144
+}
+tensors {
+  dims: 512
+  data_type: DT_HALF
+  name: "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/depthwise_bn_offset:0"
+  offset: 7364572
+  data_size: 512
+}
+tensors {
+  dims: 1
+  dims: 512
+  dims: 3
+  dims: 3
+  data_type: DT_HALF
+  name: "MobilenetV1/Conv2d_8_depthwise/depthwise_weights:0"
+  offset: 7365596
+  data_size: 4608
+}
+tensors {
+  dims: 512
+  data_type: DT_HALF
+  name: "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/Conv2D_bn_offset:0"
+  offset: 7374812
+  data_size: 512
+}
+tensors {
+  dims: 512
+  dims: 512
+  dims: 1
+  dims: 1
+  data_type: DT_HALF
+  name: "MobilenetV1/Conv2d_7_pointwise/weights:0"
+  offset: 7375836
+  data_size: 262144
+}
+tensors {
+  dims: 512
+  data_type: DT_HALF
+  name: "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/depthwise_bn_offset:0"
+  offset: 7900124
+  data_size: 512
+}
+tensors {
+  dims: 1
+  dims: 512
+  dims: 3
+  dims: 3
+  data_type: DT_HALF
+  name: "MobilenetV1/Conv2d_7_depthwise/depthwise_weights:0"
+  offset: 7901148
+  data_size: 4608
+}
+tensors {
+  dims: 512
+  data_type: DT_HALF
+  name: "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/Conv2D_bn_offset:0"
+  offset: 7910364
+  data_size: 512
+}
+tensors {
+  dims: 512
+  dims: 256
+  dims: 1
+  dims: 1
+  data_type: DT_HALF
+  name: "MobilenetV1/Conv2d_6_pointwise/weights:0"
+  offset: 7911388
+  data_size: 131072
+}
+tensors {
+  dims: 256
+  data_type: DT_HALF
+  name: "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/depthwise_bn_offset:0"
+  offset: 8173532
+  data_size: 256
+}
+tensors {
+  dims: 1
+  dims: 256
+  dims: 3
+  dims: 3
+  data_type: DT_HALF
+  name: "MobilenetV1/Conv2d_6_depthwise/depthwise_weights:0"
+  offset: 8174044
+  data_size: 2304
+}
+tensors {
+  dims: 256
+  data_type: DT_HALF
+  name: "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/Conv2D_bn_offset:0"
+  offset: 8178652
+  data_size: 256
+}
+tensors {
+  dims: 256
+  dims: 256
+  dims: 1
+  dims: 1
+  data_type: DT_HALF
+  name: "MobilenetV1/Conv2d_5_pointwise/weights:0"
+  offset: 8179164
+  data_size: 65536
+}
+tensors {
+  dims: 256
+  data_type: DT_HALF
+  name: "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/depthwise_bn_offset:0"
+  offset: 8310236
+  data_size: 256
+}
+tensors {
+  dims: 1
+  dims: 256
+  dims: 3
+  dims: 3
+  data_type: DT_HALF
+  name: "MobilenetV1/Conv2d_5_depthwise/depthwise_weights:0"
+  offset: 8310748
+  data_size: 2304
+}
+tensors {
+  dims: 256
+  data_type: DT_HALF
+  name: "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/Conv2D_bn_offset:0"
+  offset: 8315356
+  data_size: 256
+}
+tensors {
+  dims: 256
+  dims: 128
+  dims: 1
+  dims: 1
+  data_type: DT_HALF
+  name: "MobilenetV1/Conv2d_4_pointwise/weights:0"
+  offset: 8315868
+  data_size: 32768
+}
+tensors {
+  dims: 128
+  data_type: DT_HALF
+  name: "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/depthwise_bn_offset:0"
+  offset: 8381404
+  data_size: 128
+}
+tensors {
+  dims: 1
+  dims: 128
+  dims: 3
+  dims: 3
+  data_type: DT_HALF
+  name: "MobilenetV1/Conv2d_4_depthwise/depthwise_weights:0"
+  offset: 8381660
+  data_size: 1152
+}
+tensors {
+  dims: 128
+  data_type: DT_HALF
+  name: "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/Conv2D_bn_offset:0"
+  offset: 8383964
+  data_size: 128
+}
+tensors {
+  dims: 128
+  dims: 128
+  dims: 1
+  dims: 1
+  data_type: DT_HALF
+  name: "MobilenetV1/Conv2d_3_pointwise/weights:0"
+  offset: 8384220
+  data_size: 16384
+}
+tensors {
+  dims: 128
+  data_type: DT_HALF
+  name: "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/depthwise_bn_offset:0"
+  offset: 8416988
+  data_size: 128
+}
+tensors {
+  dims: 1
+  dims: 128
+  dims: 3
+  dims: 3
+  data_type: DT_HALF
+  name: "MobilenetV1/Conv2d_3_depthwise/depthwise_weights:0"
+  offset: 8417244
+  data_size: 1152
+}
+tensors {
+  dims: 128
+  data_type: DT_HALF
+  name: "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/Conv2D_bn_offset:0"
+  offset: 8419548
+  data_size: 128
+}
+tensors {
+  dims: 128
+  dims: 64
+  dims: 1
+  dims: 1
+  data_type: DT_HALF
+  name: "MobilenetV1/Conv2d_2_pointwise/weights:0"
+  offset: 8419804
+  data_size: 8192
+}
+tensors {
+  dims: 64
+  data_type: DT_HALF
+  name: "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/depthwise_bn_offset:0"
+  offset: 8436188
+  data_size: 64
+}
+tensors {
+  dims: 1
+  dims: 64
+  dims: 3
+  dims: 3
+  data_type: DT_HALF
+  name: "MobilenetV1/Conv2d_2_depthwise/depthwise_weights:0"
+  offset: 8436316
+  data_size: 576
+}
+tensors {
+  dims: 64
+  data_type: DT_HALF
+  name: "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/Conv2D_bn_offset:0"
+  offset: 8437468
+  data_size: 64
+}
+tensors {
+  dims: 64
+  dims: 32
+  dims: 1
+  dims: 1
+  data_type: DT_HALF
+  name: "MobilenetV1/Conv2d_1_pointwise/weights:0"
+  offset: 8437596
+  data_size: 2048
+}
+tensors {
+  dims: 32
+  data_type: DT_HALF
+  name: "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/depthwise_bn_offset:0"
+  offset: 8441692
+  data_size: 32
+}
+tensors {
+  dims: 1
+  dims: 32
+  dims: 3
+  dims: 3
+  data_type: DT_HALF
+  name: "MobilenetV1/Conv2d_1_depthwise/depthwise_weights:0"
+  offset: 8441756
+  data_size: 288
+}
+tensors {
+  dims: 32
+  data_type: DT_HALF
+  name: "MobilenetV1/MobilenetV1/Conv2d_0/Conv2D_bn_offset:0"
+  offset: 8442332
+  data_size: 32
+}
+tensors {
+  dims: 32
+  dims: 3
+  dims: 3
+  dims: 3
+  data_type: DT_HALF
+  name: "MobilenetV1/Conv2d_0/weights:0"
+  offset: 8442396
+  data_size: 864
+}
+data_type: DT_HALF
+input_info {
+  name: "input"
+  dims: 1
+  dims: 224
+  dims: 224
+  dims: 3
+  data_type: DT_FLOAT
+  data_format: 1
+}
+output_info {
+  name: "MobilenetV1/Predictions/Reshape_1"
+  dims: 1
+  dims: 1001
+  data_type: DT_FLOAT
+  data_format: 1
+}

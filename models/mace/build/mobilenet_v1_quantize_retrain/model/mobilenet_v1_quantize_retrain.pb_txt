@@ -1,0 +1,2470 @@
+op {
+  input: "input"
+  output: "mace_input_node_input"
+  name: "mace_input_node_input"
+  type: "Quantize"
+  arg {
+    name: "T"
+    i: 2
+  }
+  arg {
+    name: "data_format"
+    i: 1
+  }
+  arg {
+    name: "find_range_every_time"
+    i: 1
+  }
+  output_shape {
+    dims: 1
+    dims: 224
+    dims: 224
+    dims: 3
+  }
+  quantize_info {
+    scale: 0.00784313771874
+    zero_point: 128
+    minval: -1.003921628
+    maxval: 0.996078431606
+  }
+}
+op {
+  input: "mace_input_node_input"
+  input: "MobilenetV1/MobilenetV1/Conv2d_0/weights_quant/FakeQuantWithMinMaxVars/_2__cf__2:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_0/BatchNorm_Fold/bias/_1__cf__1:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_0/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_0/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 2
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 2
+    ints: 2
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 112
+    dims: 112
+    dims: 32
+  }
+  quantize_info {
+    scale: 0.023528477177
+    zero_point: 0
+    minval: 0.0
+    maxval: 5.99976158142
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_0/Relu6:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/weights_quant/FakeQuantWithMinMaxVars/_20__cf__20:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/BatchNorm_Fold/bias/_19__cf__19:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/Relu6"
+  type: "DepthwiseConv2d"
+  arg {
+    name: "T"
+    i: 2
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 112
+    dims: 112
+    dims: 32
+  }
+  quantize_info {
+    scale: 0.023528477177
+    zero_point: 0
+    minval: 0.0
+    maxval: 5.99976158142
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/Relu6:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/weights_quant/FakeQuantWithMinMaxVars/_22__cf__22:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/BatchNorm_Fold/bias/_21__cf__21:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 2
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 112
+    dims: 112
+    dims: 64
+  }
+  quantize_info {
+    scale: 0.023528477177
+    zero_point: 0
+    minval: 0.0
+    maxval: 5.99976158142
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/Relu6:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/weights_quant/FakeQuantWithMinMaxVars/_24__cf__24:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/BatchNorm_Fold/bias/_23__cf__23:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/Relu6"
+  type: "DepthwiseConv2d"
+  arg {
+    name: "T"
+    i: 2
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 2
+    ints: 2
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 56
+    dims: 56
+    dims: 64
+  }
+  quantize_info {
+    scale: 0.023528477177
+    zero_point: 0
+    minval: 0.0
+    maxval: 5.99976158142
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/Relu6:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/weights_quant/FakeQuantWithMinMaxVars/_26__cf__26:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/BatchNorm_Fold/bias/_25__cf__25:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 2
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 56
+    dims: 56
+    dims: 128
+  }
+  quantize_info {
+    scale: 0.023528477177
+    zero_point: 0
+    minval: 0.0
+    maxval: 5.99976158142
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/Relu6:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/weights_quant/FakeQuantWithMinMaxVars/_28__cf__28:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/BatchNorm_Fold/bias/_27__cf__27:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/Relu6"
+  type: "DepthwiseConv2d"
+  arg {
+    name: "T"
+    i: 2
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 56
+    dims: 56
+    dims: 128
+  }
+  quantize_info {
+    scale: 0.023528477177
+    zero_point: 0
+    minval: 0.0
+    maxval: 5.99976158142
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/Relu6:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/weights_quant/FakeQuantWithMinMaxVars/_30__cf__30:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/BatchNorm_Fold/bias/_29__cf__29:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 2
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 56
+    dims: 56
+    dims: 128
+  }
+  quantize_info {
+    scale: 0.023528477177
+    zero_point: 0
+    minval: 0.0
+    maxval: 5.99976158142
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/Relu6:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/weights_quant/FakeQuantWithMinMaxVars/_32__cf__32:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/BatchNorm_Fold/bias/_31__cf__31:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/Relu6"
+  type: "DepthwiseConv2d"
+  arg {
+    name: "T"
+    i: 2
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 2
+    ints: 2
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 28
+    dims: 28
+    dims: 128
+  }
+  quantize_info {
+    scale: 0.023528477177
+    zero_point: 0
+    minval: 0.0
+    maxval: 5.99976158142
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/Relu6:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/weights_quant/FakeQuantWithMinMaxVars/_34__cf__34:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/BatchNorm_Fold/bias/_33__cf__33:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 2
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 28
+    dims: 28
+    dims: 256
+  }
+  quantize_info {
+    scale: 0.023528477177
+    zero_point: 0
+    minval: 0.0
+    maxval: 5.99976158142
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/Relu6:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/weights_quant/FakeQuantWithMinMaxVars/_36__cf__36:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/BatchNorm_Fold/bias/_35__cf__35:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/Relu6"
+  type: "DepthwiseConv2d"
+  arg {
+    name: "T"
+    i: 2
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 28
+    dims: 28
+    dims: 256
+  }
+  quantize_info {
+    scale: 0.023528477177
+    zero_point: 0
+    minval: 0.0
+    maxval: 5.99976158142
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/Relu6:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/weights_quant/FakeQuantWithMinMaxVars/_38__cf__38:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/BatchNorm_Fold/bias/_37__cf__37:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 2
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 28
+    dims: 28
+    dims: 256
+  }
+  quantize_info {
+    scale: 0.023528477177
+    zero_point: 0
+    minval: 0.0
+    maxval: 5.99976158142
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/Relu6:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/weights_quant/FakeQuantWithMinMaxVars/_40__cf__40:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/BatchNorm_Fold/bias/_39__cf__39:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/Relu6"
+  type: "DepthwiseConv2d"
+  arg {
+    name: "T"
+    i: 2
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 2
+    ints: 2
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 14
+    dims: 14
+    dims: 256
+  }
+  quantize_info {
+    scale: 0.023528477177
+    zero_point: 0
+    minval: 0.0
+    maxval: 5.99976158142
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/Relu6:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/weights_quant/FakeQuantWithMinMaxVars/_42__cf__42:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/BatchNorm_Fold/bias/_41__cf__41:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 2
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 14
+    dims: 14
+    dims: 512
+  }
+  quantize_info {
+    scale: 0.023528477177
+    zero_point: 0
+    minval: 0.0
+    maxval: 5.99976158142
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/Relu6:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/weights_quant/FakeQuantWithMinMaxVars/_44__cf__44:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/BatchNorm_Fold/bias/_43__cf__43:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/Relu6"
+  type: "DepthwiseConv2d"
+  arg {
+    name: "T"
+    i: 2
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 14
+    dims: 14
+    dims: 512
+  }
+  quantize_info {
+    scale: 0.023528477177
+    zero_point: 0
+    minval: 0.0
+    maxval: 5.99976158142
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/Relu6:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/weights_quant/FakeQuantWithMinMaxVars/_46__cf__46:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/BatchNorm_Fold/bias/_45__cf__45:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 2
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 14
+    dims: 14
+    dims: 512
+  }
+  quantize_info {
+    scale: 0.023528477177
+    zero_point: 0
+    minval: 0.0
+    maxval: 5.99976158142
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/Relu6:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/weights_quant/FakeQuantWithMinMaxVars/_48__cf__48:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/BatchNorm_Fold/bias/_47__cf__47:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/Relu6"
+  type: "DepthwiseConv2d"
+  arg {
+    name: "T"
+    i: 2
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 14
+    dims: 14
+    dims: 512
+  }
+  quantize_info {
+    scale: 0.023528477177
+    zero_point: 0
+    minval: 0.0
+    maxval: 5.99976158142
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/Relu6:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/weights_quant/FakeQuantWithMinMaxVars/_50__cf__50:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/BatchNorm_Fold/bias/_49__cf__49:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 2
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 14
+    dims: 14
+    dims: 512
+  }
+  quantize_info {
+    scale: 0.023528477177
+    zero_point: 0
+    minval: 0.0
+    maxval: 5.99976158142
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/Relu6:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/weights_quant/FakeQuantWithMinMaxVars/_52__cf__52:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/BatchNorm_Fold/bias/_51__cf__51:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/Relu6"
+  type: "DepthwiseConv2d"
+  arg {
+    name: "T"
+    i: 2
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 14
+    dims: 14
+    dims: 512
+  }
+  quantize_info {
+    scale: 0.023528477177
+    zero_point: 0
+    minval: 0.0
+    maxval: 5.99976158142
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/Relu6:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/weights_quant/FakeQuantWithMinMaxVars/_54__cf__54:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/BatchNorm_Fold/bias/_53__cf__53:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 2
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 14
+    dims: 14
+    dims: 512
+  }
+  quantize_info {
+    scale: 0.023528477177
+    zero_point: 0
+    minval: 0.0
+    maxval: 5.99976158142
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/Relu6:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/weights_quant/FakeQuantWithMinMaxVars/_4__cf__4:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/BatchNorm_Fold/bias/_3__cf__3:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/Relu6"
+  type: "DepthwiseConv2d"
+  arg {
+    name: "T"
+    i: 2
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 14
+    dims: 14
+    dims: 512
+  }
+  quantize_info {
+    scale: 0.023528477177
+    zero_point: 0
+    minval: 0.0
+    maxval: 5.99976158142
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/Relu6:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/weights_quant/FakeQuantWithMinMaxVars/_6__cf__6:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/BatchNorm_Fold/bias/_5__cf__5:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 2
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 14
+    dims: 14
+    dims: 512
+  }
+  quantize_info {
+    scale: 0.023528477177
+    zero_point: 0
+    minval: 0.0
+    maxval: 5.99976158142
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/Relu6:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/weights_quant/FakeQuantWithMinMaxVars/_8__cf__8:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/BatchNorm_Fold/bias/_7__cf__7:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/Relu6"
+  type: "DepthwiseConv2d"
+  arg {
+    name: "T"
+    i: 2
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 14
+    dims: 14
+    dims: 512
+  }
+  quantize_info {
+    scale: 0.023528477177
+    zero_point: 0
+    minval: 0.0
+    maxval: 5.99976158142
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/Relu6:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/weights_quant/FakeQuantWithMinMaxVars/_10__cf__10:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/BatchNorm_Fold/bias/_9__cf__9:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 2
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 14
+    dims: 14
+    dims: 512
+  }
+  quantize_info {
+    scale: 0.023528477177
+    zero_point: 0
+    minval: 0.0
+    maxval: 5.99976158142
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/Relu6:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/weights_quant/FakeQuantWithMinMaxVars/_12__cf__12:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/BatchNorm_Fold/bias/_11__cf__11:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/Relu6"
+  type: "DepthwiseConv2d"
+  arg {
+    name: "T"
+    i: 2
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 2
+    ints: 2
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 7
+    dims: 7
+    dims: 512
+  }
+  quantize_info {
+    scale: 0.023528477177
+    zero_point: 0
+    minval: 0.0
+    maxval: 5.99976158142
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/Relu6:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/weights_quant/FakeQuantWithMinMaxVars/_14__cf__14:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/BatchNorm_Fold/bias/_13__cf__13:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 2
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 7
+    dims: 7
+    dims: 1024
+  }
+  quantize_info {
+    scale: 0.023528477177
+    zero_point: 0
+    minval: 0.0
+    maxval: 5.99976158142
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/Relu6:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/weights_quant/FakeQuantWithMinMaxVars/_16__cf__16:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/BatchNorm_Fold/bias/_15__cf__15:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/Relu6"
+  type: "DepthwiseConv2d"
+  arg {
+    name: "T"
+    i: 2
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 7
+    dims: 7
+    dims: 1024
+  }
+  quantize_info {
+    scale: 0.023528477177
+    zero_point: 0
+    minval: 0.0
+    maxval: 5.99976158142
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/Relu6:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/weights_quant/FakeQuantWithMinMaxVars/_18__cf__18:0"
+  input: "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/BatchNorm_Fold/bias/_17__cf__17:0"
+  output: "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 2
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  output_shape {
+    dims: 1
+    dims: 7
+    dims: 7
+    dims: 1024
+  }
+  quantize_info {
+    scale: 0.023528477177
+    zero_point: 0
+    minval: 0.0
+    maxval: 5.99976158142
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/Relu6:0"
+  output: "MobilenetV1/Logits/AvgPool_1a/AvgPool:0"
+  name: "MobilenetV1/Logits/AvgPool_1a/AvgPool"
+  type: "Pooling"
+  arg {
+    name: "T"
+    i: 2
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "pooling_type"
+    i: 1
+  }
+  arg {
+    name: "padding"
+    i: 0
+  }
+  arg {
+    name: "strides"
+    ints: 2
+    ints: 2
+  }
+  arg {
+    name: "kernels"
+    ints: 7
+    ints: 7
+  }
+  output_shape {
+    dims: 1
+    dims: 1
+    dims: 1
+    dims: 1024
+  }
+  quantize_info {
+    scale: 0.023528477177
+    zero_point: 0
+    minval: 0.0
+    maxval: 5.99976158142
+  }
+}
+op {
+  input: "MobilenetV1/Logits/AvgPool_1a/AvgPool:0"
+  input: "MobilenetV1/Logits/Conv2d_1c_1x1/weights_quant/FakeQuantWithMinMaxVars/_0__cf__0:0"
+  input: "MobilenetV1/Logits/Conv2d_1c_1x1/biases:0"
+  output: "MobilenetV1/Logits/Conv2d_1c_1x1/BiasAdd:0"
+  name: "MobilenetV1/Logits/Conv2d_1c_1x1/BiasAdd"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 2
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  output_shape {
+    dims: 1
+    dims: 1
+    dims: 1
+    dims: 1001
+  }
+  quantize_info {
+    scale: 0.166099220514
+    zero_point: 66
+    minval: -10.9625482559
+    maxval: 31.3927516937
+  }
+}
+op {
+  input: "MobilenetV1/Logits/Conv2d_1c_1x1/BiasAdd:0"
+  output: "MobilenetV1/Logits/SpatialSqueeze:0"
+  name: "MobilenetV1/Logits/SpatialSqueeze"
+  type: "Squeeze"
+  arg {
+    name: "T"
+    i: 2
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "axis"
+    ints: 1
+    ints: 2
+  }
+  arg {
+    name: "has_data_format"
+    i: 1
+  }
+  output_shape {
+    dims: 1
+    dims: 1001
+  }
+  quantize_info {
+    scale: 0.166099220514
+    zero_point: 66
+    minval: -10.9625482559
+    maxval: 31.3927516937
+  }
+}
+op {
+  input: "MobilenetV1/Logits/SpatialSqueeze:0"
+  output: "mace_output_node_MobilenetV1/Predictions/Softmax:0"
+  name: "mace_output_node_MobilenetV1/Predictions/Softmax"
+  type: "Softmax"
+  arg {
+    name: "T"
+    i: 2
+  }
+  arg {
+    name: "framework_type"
+    i: 0
+  }
+  arg {
+    name: "data_format"
+    i: 1000
+  }
+  arg {
+    name: "has_data_format"
+    i: 1
+  }
+  output_shape {
+    dims: 1
+    dims: 1001
+  }
+  quantize_info {
+    scale: 0.00392156885937
+    zero_point: 0
+    minval: 0.0
+    maxval: 1.0
+  }
+}
+op {
+  input: "mace_output_node_MobilenetV1/Predictions/Softmax:0"
+  output: "MobilenetV1/Predictions/Softmax:0"
+  name: "MobilenetV1/Predictions/Softmax_0"
+  type: "Dequantize"
+  arg {
+    name: "T"
+    i: 2
+  }
+  arg {
+    name: "data_format"
+    i: 1
+  }
+  output_shape {
+    dims: 1
+    dims: 1001
+  }
+  output_type: DT_FLOAT
+}
+arg {
+  name: "filter_format"
+  i: 103
+}
+arg {
+  name: "data_format"
+  i: 1
+}
+arg {
+  name: "opencl_mem_type"
+  i: 2
+}
+arg {
+  name: "quantize_flag"
+  i: 1
+}
+tensors {
+  dims: 1001
+  data_type: DT_INT32
+  name: "MobilenetV1/Logits/Conv2d_1c_1x1/biases:0"
+  offset: 0
+  data_size: 1001
+  scale: 0.000117327115731
+  zero_point: 0
+  minval: 0.0
+  maxval: 0.0
+  quantized: true
+}
+tensors {
+  dims: 2
+  data_type: DT_INT32
+  name: "MobilenetV1/Predictions/Reshape/shape:0"
+  offset: 4004
+  data_size: 2
+}
+tensors {
+  dims: 1001
+  dims: 1
+  dims: 1
+  dims: 1024
+  data_type: DT_UINT8
+  name: "MobilenetV1/Logits/Conv2d_1c_1x1/weights_quant/FakeQuantWithMinMaxVars/_0__cf__0:0"
+  offset: 4012
+  data_size: 1025024
+  scale: 0.0049866004847
+  zero_point: 74
+  minval: -0.3690084517
+  maxval: 0.902574717999
+  quantized: true
+}
+tensors {
+  dims: 32
+  data_type: DT_INT32
+  name: "MobilenetV1/MobilenetV1/Conv2d_0/BatchNorm_Fold/bias/_1__cf__1:0"
+  offset: 1029036
+  data_size: 32
+  scale: 0.000171189647517
+  zero_point: 0
+  minval: 0.0
+  maxval: 0.0
+  quantized: true
+}
+tensors {
+  dims: 32
+  dims: 3
+  dims: 3
+  dims: 3
+  data_type: DT_UINT8
+  name: "MobilenetV1/MobilenetV1/Conv2d_0/weights_quant/FakeQuantWithMinMaxVars/_2__cf__2:0"
+  offset: 1029164
+  data_size: 864
+  scale: 0.021826678887
+  zero_point: 152
+  minval: -3.31765508652
+  maxval: 2.24814796448
+  quantized: true
+}
+tensors {
+  dims: 512
+  data_type: DT_INT32
+  name: "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/BatchNorm_Fold/bias/_3__cf__3:0"
+  offset: 1030028
+  data_size: 512
+  scale: 0.00057243485935
+  zero_point: 0
+  minval: 0.0
+  maxval: 0.0
+  quantized: true
+}
+tensors {
+  dims: 3
+  dims: 3
+  dims: 512
+  dims: 1
+  data_type: DT_UINT8
+  name: "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/weights_quant/FakeQuantWithMinMaxVars/_4__cf__4:0"
+  offset: 1032076
+  data_size: 4608
+  scale: 0.0243294481188
+  zero_point: 135
+  minval: -3.28447556496
+  maxval: 2.91953372955
+  quantized: true
+}
+tensors {
+  dims: 512
+  data_type: DT_INT32
+  name: "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/BatchNorm_Fold/bias/_5__cf__5:0"
+  offset: 1036684
+  data_size: 512
+  scale: 0.000227253331104
+  zero_point: 0
+  minval: 0.0
+  maxval: 0.0
+  quantized: true
+}
+tensors {
+  dims: 512
+  dims: 1
+  dims: 1
+  dims: 512
+  data_type: DT_UINT8
+  name: "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/weights_quant/FakeQuantWithMinMaxVars/_6__cf__6:0"
+  offset: 1038732
+  data_size: 262144
+  scale: 0.00965865049511
+  zero_point: 100
+  minval: -0.965865015984
+  maxval: 1.4970908165
+  quantized: true
+}
+tensors {
+  dims: 512
+  data_type: DT_INT32
+  name: "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/BatchNorm_Fold/bias/_7__cf__7:0"
+  offset: 1300876
+  data_size: 512
+  scale: 0.00045567160123
+  zero_point: 0
+  minval: 0.0
+  maxval: 0.0
+  quantized: true
+}
+tensors {
+  dims: 3
+  dims: 3
+  dims: 512
+  dims: 1
+  data_type: DT_UINT8
+  name: "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/weights_quant/FakeQuantWithMinMaxVars/_8__cf__8:0"
+  offset: 1302924
+  data_size: 4608
+  scale: 0.0193668119609
+  zero_point: 106
+  minval: -2.05288219452
+  maxval: 2.88565516472
+  quantized: true
+}
+tensors {
+  dims: 512
+  data_type: DT_INT32
+  name: "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/BatchNorm_Fold/bias/_9__cf__9:0"
+  offset: 1307532
+  data_size: 512
+  scale: 0.000128159474116
+  zero_point: 0
+  minval: 0.0
+  maxval: 0.0
+  quantized: true
+}
+tensors {
+  dims: 512
+  dims: 1
+  dims: 1
+  dims: 512
+  data_type: DT_UINT8
+  name: "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/weights_quant/FakeQuantWithMinMaxVars/_10__cf__10:0"
+  offset: 1309580
+  data_size: 262144
+  scale: 0.00544699374586
+  zero_point: 153
+  minval: -0.833390057087
+  maxval: 0.555593371391
+  quantized: true
+}
+tensors {
+  dims: 512
+  data_type: DT_INT32
+  name: "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/BatchNorm_Fold/bias/_11__cf__11:0"
+  offset: 1571724
+  data_size: 512
+  scale: 0.000184359611012
+  zero_point: 0
+  minval: 0.0
+  maxval: 0.0
+  quantized: true
+}
+tensors {
+  dims: 3
+  dims: 3
+  dims: 512
+  dims: 1
+  data_type: DT_UINT8
+  name: "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/weights_quant/FakeQuantWithMinMaxVars/_12__cf__12:0"
+  offset: 1573772
+  data_size: 4608
+  scale: 0.00783559493721
+  zero_point: 126
+  minval: -0.987285017967
+  maxval: 1.01079177856
+  quantized: true
+}
+tensors {
+  dims: 1024
+  data_type: DT_INT32
+  name: "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/BatchNorm_Fold/bias/_13__cf__13:0"
+  offset: 1578380
+  data_size: 1024
+  scale: 0.000192444800632
+  zero_point: 0
+  minval: 0.0
+  maxval: 0.0
+  quantized: true
+}
+tensors {
+  dims: 1024
+  dims: 1
+  dims: 1
+  dims: 512
+  data_type: DT_UINT8
+  name: "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/weights_quant/FakeQuantWithMinMaxVars/_14__cf__14:0"
+  offset: 1582476
+  data_size: 524288
+  scale: 0.00817922875285
+  zero_point: 130
+  minval: -1.06329977512
+  maxval: 1.02240359783
+  quantized: true
+}
+tensors {
+  dims: 1024
+  data_type: DT_INT32
+  name: "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/BatchNorm_Fold/bias/_15__cf__15:0"
+  offset: 2106764
+  data_size: 1024
+  scale: 0.00296857091598
+  zero_point: 0
+  minval: 0.0
+  maxval: 0.0
+  quantized: true
+}
+tensors {
+  dims: 3
+  dims: 3
+  dims: 1024
+  dims: 1
+  data_type: DT_UINT8
+  name: "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/weights_quant/FakeQuantWithMinMaxVars/_16__cf__16:0"
+  offset: 2110860
+  data_size: 9216
+  scale: 0.126169279218
+  zero_point: 211
+  minval: -26.621717453
+  maxval: 5.55144834518
+  quantized: true
+}
+tensors {
+  dims: 1024
+  data_type: DT_INT32
+  name: "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/BatchNorm_Fold/bias/_17__cf__17:0"
+  offset: 2120076
+  data_size: 1024
+  scale: 0.000424645550083
+  zero_point: 0
+  minval: 0.0
+  maxval: 0.0
+  quantized: true
+}
+tensors {
+  dims: 1024
+  dims: 1
+  dims: 1
+  dims: 1024
+  data_type: DT_UINT8
+  name: "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/weights_quant/FakeQuantWithMinMaxVars/_18__cf__18:0"
+  offset: 2124172
+  data_size: 1048576
+  scale: 0.0180481523275
+  zero_point: 95
+  minval: -1.71457445621
+  maxval: 2.88770437241
+  quantized: true
+}
+tensors {
+  dims: 32
+  data_type: DT_INT32
+  name: "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/BatchNorm_Fold/bias/_19__cf__19:0"
+  offset: 3172748
+  data_size: 32
+  scale: 0.00687500089407
+  zero_point: 0
+  minval: 0.0
+  maxval: 0.0
+  quantized: true
+}
+tensors {
+  dims: 3
+  dims: 3
+  dims: 32
+  dims: 1
+  data_type: DT_UINT8
+  name: "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/weights_quant/FakeQuantWithMinMaxVars/_20__cf__20:0"
+  offset: 3172876
+  data_size: 288
+  scale: 0.292199134827
+  zero_point: 110
+  minval: -32.1419067383
+  maxval: 42.3688774109
+  quantized: true
+}
+tensors {
+  dims: 64
+  data_type: DT_INT32
+  name: "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/BatchNorm_Fold/bias/_21__cf__21:0"
+  offset: 3173164
+  data_size: 64
+  scale: 0.000715758593287
+  zero_point: 0
+  minval: 0.0
+  maxval: 0.0
+  quantized: true
+}
+tensors {
+  dims: 64
+  dims: 1
+  dims: 1
+  dims: 32
+  data_type: DT_UINT8
+  name: "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/weights_quant/FakeQuantWithMinMaxVars/_22__cf__22:0"
+  offset: 3173420
+  data_size: 2048
+  scale: 0.0304209496826
+  zero_point: 121
+  minval: -3.68093490601
+  maxval: 4.07640743256
+  quantized: true
+}
+tensors {
+  dims: 64
+  data_type: DT_INT32
+  name: "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/BatchNorm_Fold/bias/_23__cf__23:0"
+  offset: 3175468
+  data_size: 64
+  scale: 0.00947663187981
+  zero_point: 0
+  minval: 0.0
+  maxval: 0.0
+  quantized: true
+}
+tensors {
+  dims: 3
+  dims: 3
+  dims: 64
+  dims: 1
+  data_type: DT_UINT8
+  name: "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/weights_quant/FakeQuantWithMinMaxVars/_24__cf__24:0"
+  offset: 3175724
+  data_size: 576
+  scale: 0.402772843838
+  zero_point: 130
+  minval: -52.3604698181
+  maxval: 50.3466072083
+  quantized: true
+}
+tensors {
+  dims: 128
+  data_type: DT_INT32
+  name: "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/BatchNorm_Fold/bias/_25__cf__25:0"
+  offset: 3176300
+  data_size: 128
+  scale: 0.000356413598638
+  zero_point: 0
+  minval: 0.0
+  maxval: 0.0
+  quantized: true
+}
+tensors {
+  dims: 128
+  dims: 1
+  dims: 1
+  dims: 64
+  data_type: DT_UINT8
+  name: "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/weights_quant/FakeQuantWithMinMaxVars/_26__cf__26:0"
+  offset: 3176812
+  data_size: 8192
+  scale: 0.0151481796056
+  zero_point: 104
+  minval: -1.57541072369
+  maxval: 2.28737521172
+  quantized: true
+}
+tensors {
+  dims: 128
+  data_type: DT_INT32
+  name: "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/BatchNorm_Fold/bias/_27__cf__27:0"
+  offset: 3185004
+  data_size: 128
+  scale: 0.00142435054295
+  zero_point: 0
+  minval: 0.0
+  maxval: 0.0
+  quantized: true
+}
+tensors {
+  dims: 3
+  dims: 3
+  dims: 128
+  dims: 1
+  data_type: DT_UINT8
+  name: "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/weights_quant/FakeQuantWithMinMaxVars/_28__cf__28:0"
+  offset: 3185516
+  data_size: 1152
+  scale: 0.0605373010039
+  zero_point: 161
+  minval: -9.7465057373
+  maxval: 5.69050645828
+  quantized: true
+}
+tensors {
+  dims: 128
+  data_type: DT_INT32
+  name: "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/BatchNorm_Fold/bias/_29__cf__29:0"
+  offset: 3186668
+  data_size: 128
+  scale: 0.000323644984746
+  zero_point: 0
+  minval: 0.0
+  maxval: 0.0
+  quantized: true
+}
+tensors {
+  dims: 128
+  dims: 1
+  dims: 1
+  dims: 128
+  data_type: DT_UINT8
+  name: "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/weights_quant/FakeQuantWithMinMaxVars/_30__cf__30:0"
+  offset: 3187180
+  data_size: 16384
+  scale: 0.0137554584071
+  zero_point: 95
+  minval: -1.30676853657
+  maxval: 2.20087337494
+  quantized: true
+}
+tensors {
+  dims: 128
+  data_type: DT_INT32
+  name: "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/BatchNorm_Fold/bias/_31__cf__31:0"
+  offset: 3203564
+  data_size: 128
+  scale: 0.000394292030251
+  zero_point: 0
+  minval: 0.0
+  maxval: 0.0
+  quantized: true
+}
+tensors {
+  dims: 3
+  dims: 3
+  dims: 128
+  dims: 1
+  data_type: DT_UINT8
+  name: "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/weights_quant/FakeQuantWithMinMaxVars/_32__cf__32:0"
+  offset: 3204076
+  data_size: 1152
+  scale: 0.0167580768466
+  zero_point: 123
+  minval: -2.06124353409
+  maxval: 2.21206617355
+  quantized: true
+}
+tensors {
+  dims: 256
+  data_type: DT_INT32
+  name: "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/BatchNorm_Fold/bias/_33__cf__33:0"
+  offset: 3205228
+  data_size: 256
+  scale: 0.000178859889274
+  zero_point: 0
+  minval: 0.0
+  maxval: 0.0
+  quantized: true
+}
+tensors {
+  dims: 256
+  dims: 1
+  dims: 1
+  dims: 128
+  data_type: DT_UINT8
+  name: "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/weights_quant/FakeQuantWithMinMaxVars/_34__cf__34:0"
+  offset: 3206252
+  data_size: 32768
+  scale: 0.00760184694082
+  zero_point: 151
+  minval: -1.14787888527
+  maxval: 0.790592074394
+  quantized: true
+}
+tensors {
+  dims: 256
+  data_type: DT_INT32
+  name: "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/BatchNorm_Fold/bias/_35__cf__35:0"
+  offset: 3239020
+  data_size: 256
+  scale: 0.000965967949014
+  zero_point: 0
+  minval: 0.0
+  maxval: 0.0
+  quantized: true
+}
+tensors {
+  dims: 3
+  dims: 3
+  dims: 256
+  dims: 1
+  data_type: DT_UINT8
+  name: "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/weights_quant/FakeQuantWithMinMaxVars/_36__cf__36:0"
+  offset: 3240044
+  data_size: 2304
+  scale: 0.0410552695394
+  zero_point: 129
+  minval: -5.29612970352
+  maxval: 5.17296409607
+  quantized: true
+}
+tensors {
+  dims: 256
+  data_type: DT_INT32
+  name: "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/BatchNorm_Fold/bias/_37__cf__37:0"
+  offset: 3242348
+  data_size: 256
+  scale: 0.000151326079504
+  zero_point: 0
+  minval: 0.0
+  maxval: 0.0
+  quantized: true
+}
+tensors {
+  dims: 256
+  dims: 1
+  dims: 1
+  dims: 256
+  data_type: DT_UINT8
+  name: "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/weights_quant/FakeQuantWithMinMaxVars/_38__cf__38:0"
+  offset: 3243372
+  data_size: 65536
+  scale: 0.00643161404878
+  zero_point: 123
+  minval: -0.791088521481
+  maxval: 0.848973035812
+  quantized: true
+}
+tensors {
+  dims: 256
+  data_type: DT_INT32
+  name: "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/BatchNorm_Fold/bias/_39__cf__39:0"
+  offset: 3308908
+  data_size: 256
+  scale: 0.000316711928463
+  zero_point: 0
+  minval: 0.0
+  maxval: 0.0
+  quantized: true
+}
+tensors {
+  dims: 3
+  dims: 3
+  dims: 256
+  dims: 1
+  data_type: DT_UINT8
+  name: "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/weights_quant/FakeQuantWithMinMaxVars/_40__cf__40:0"
+  offset: 3309932
+  data_size: 2304
+  scale: 0.0134607916698
+  zero_point: 122
+  minval: -1.64221656322
+  maxval: 1.79028534889
+  quantized: true
+}
+tensors {
+  dims: 512
+  data_type: DT_INT32
+  name: "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/BatchNorm_Fold/bias/_41__cf__41:0"
+  offset: 3312236
+  data_size: 512
+  scale: 0.000215784850297
+  zero_point: 0
+  minval: 0.0
+  maxval: 0.0
+  quantized: true
+}
+tensors {
+  dims: 512
+  dims: 1
+  dims: 1
+  dims: 256
+  data_type: DT_UINT8
+  name: "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/weights_quant/FakeQuantWithMinMaxVars/_42__cf__42:0"
+  offset: 3314284
+  data_size: 131072
+  scale: 0.00917122047395
+  zero_point: 110
+  minval: -1.00883424282
+  maxval: 1.32982695103
+  quantized: true
+}
+tensors {
+  dims: 512
+  data_type: DT_INT32
+  name: "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/BatchNorm_Fold/bias/_43__cf__43:0"
+  offset: 3445356
+  data_size: 512
+  scale: 0.000869018549565
+  zero_point: 0
+  minval: 0.0
+  maxval: 0.0
+  quantized: true
+}
+tensors {
+  dims: 3
+  dims: 3
+  dims: 512
+  dims: 1
+  data_type: DT_UINT8
+  name: "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/weights_quant/FakeQuantWithMinMaxVars/_44__cf__44:0"
+  offset: 3447404
+  data_size: 4608
+  scale: 0.0369347557425
+  zero_point: 132
+  minval: -4.87538766861
+  maxval: 4.54297494888
+  quantized: true
+}
+tensors {
+  dims: 512
+  data_type: DT_INT32
+  name: "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/BatchNorm_Fold/bias/_45__cf__45:0"
+  offset: 3452012
+  data_size: 512
+  scale: 0.000124702026369
+  zero_point: 0
+  minval: 0.0
+  maxval: 0.0
+  quantized: true
+}
+tensors {
+  dims: 512
+  dims: 1
+  dims: 1
+  dims: 512
+  data_type: DT_UINT8
+  name: "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/weights_quant/FakeQuantWithMinMaxVars/_46__cf__46:0"
+  offset: 3454060
+  data_size: 262144
+  scale: 0.00530004687607
+  zero_point: 140
+  minval: -0.742006540298
+  maxval: 0.609505414963
+  quantized: true
+}
+tensors {
+  dims: 512
+  data_type: DT_INT32
+  name: "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/BatchNorm_Fold/bias/_47__cf__47:0"
+  offset: 3716204
+  data_size: 512
+  scale: 0.00100254523568
+  zero_point: 0
+  minval: 0.0
+  maxval: 0.0
+  quantized: true
+}
+tensors {
+  dims: 3
+  dims: 3
+  dims: 512
+  dims: 1
+  data_type: DT_UINT8
+  name: "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/weights_quant/FakeQuantWithMinMaxVars/_48__cf__48:0"
+  offset: 3718252
+  data_size: 4608
+  scale: 0.0426098667085
+  zero_point: 94
+  minval: -4.00532722473
+  maxval: 6.86018848419
+  quantized: true
+}
+tensors {
+  dims: 512
+  data_type: DT_INT32
+  name: "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/BatchNorm_Fold/bias/_49__cf__49:0"
+  offset: 3722860
+  data_size: 512
+  scale: 0.000116778544907
+  zero_point: 0
+  minval: 0.0
+  maxval: 0.0
+  quantized: true
+}
+tensors {
+  dims: 512
+  dims: 1
+  dims: 1
+  dims: 512
+  data_type: DT_UINT8
+  name: "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/weights_quant/FakeQuantWithMinMaxVars/_50__cf__50:0"
+  offset: 3724908
+  data_size: 262144
+  scale: 0.0049632852897
+  zero_point: 128
+  minval: -0.635300517082
+  maxval: 0.630337238312
+  quantized: true
+}
+tensors {
+  dims: 512
+  data_type: DT_INT32
+  name: "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/BatchNorm_Fold/bias/_51__cf__51:0"
+  offset: 3987052
+  data_size: 512
+  scale: 0.000667240761686
+  zero_point: 0
+  minval: 0.0
+  maxval: 0.0
+  quantized: true
+}
+tensors {
+  dims: 3
+  dims: 3
+  dims: 512
+  dims: 1
+  data_type: DT_UINT8
+  name: "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/weights_quant/FakeQuantWithMinMaxVars/_52__cf__52:0"
+  offset: 3989100
+  data_size: 4608
+  scale: 0.0283588599414
+  zero_point: 128
+  minval: -3.62993407249
+  maxval: 3.60157513618
+  quantized: true
+}
+tensors {
+  dims: 512
+  data_type: DT_INT32
+  name: "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/BatchNorm_Fold/bias/_53__cf__53:0"
+  offset: 3993708
+  data_size: 512
+  scale: 0.000182837349712
+  zero_point: 0
+  minval: 0.0
+  maxval: 0.0
+  quantized: true
+}
+tensors {
+  dims: 512
+  dims: 1
+  dims: 1
+  dims: 512
+  data_type: DT_UINT8
+  name: "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/weights_quant/FakeQuantWithMinMaxVars/_54__cf__54:0"
+  offset: 3995756
+  data_size: 262144
+  scale: 0.00777089595795
+  zero_point: 89
+  minval: -0.691609740257
+  maxval: 1.28996872902
+  quantized: true
+}
+data_type: DT_FLOAT
+input_info {
+  name: "input"
+  dims: 1
+  dims: 224
+  dims: 224
+  dims: 3
+  data_type: DT_FLOAT
+  data_format: 1
+  scale: 0.00784313771874
+  zero_point: 128
+}
+output_info {
+  name: "MobilenetV1/Predictions/Softmax:0"
+  dims: 1
+  dims: 1001
+  data_type: DT_FLOAT
+  data_format: 1
+  scale: 0.00392156885937
+  zero_point: 0
+}

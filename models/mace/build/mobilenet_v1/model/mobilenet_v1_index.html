@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<style>
+    line {
+        stroke: #999;
+        stroke-width: 1.5px;
+        stroke: black;
+        fill: transparent;
+        opacity: 0.5;
+    }
+
+    ellipse {
+        stroke-width: 1.5px;
+        stroke: black;
+        opacity: 0.5;
+    }
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <title>MACE Model</title>
+</head>
+
+<body>
+<h1>MACE Visualization</h1>
+
+<h2>Ops</h2>
+<div id="op_table"></div>
+
+<h2>Tensors</h2>
+<div id="tensor_table"></div>
+
+<h2>Graph</h2>
+Click node to see details at bottom of this page.
+<div class='graph'>
+    <svg id='graph' width='1000' height='1600' viewBox='0 0 1000 1600'></svg>
+</div>
+
+<div>
+    <pre id='info'></pre>
+</div>
+
+</body>
+
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script>
+    /*
+     var graph = {
+     "nodes": [
+     {
+     "name": "A_",
+     "id": "A",
+     },
+     {
+     "name": "B_",
+     "id": "B",
+     }
+     ],
+     "links": [
+     {
+     "source": "A",
+     "target": "B"
+     }
+     ]
+     }
+     */
+    var graph ={"nodes": [{"outputShape": [{"dims": ["1", "112", "112", "32"]}], "name": "MobilenetV1/MobilenetV1/Conv2d_0/Relu6", "output": ["MobilenetV1/MobilenetV1/Conv2d_0/Relu6:0"], "node_type": "op", "arg": [{"i": "3", "name": "T"}, {"i": "0", "name": "framework_type"}, {"i": "1000", "name": "data_format"}, {"i": "1", "name": "padding"}, {"name": "strides", "ints": ["2", "2"]}, {"name": "dilations", "ints": ["1", "1"]}, {"s": "UkVMVVg=", "name": "activation"}, {"name": "max_limit", "f": 6.0}], "input": ["input", "MobilenetV1/Conv2d_0/weights:0", "MobilenetV1/MobilenetV1/Conv2d_0/Conv2D_bn_offset:0"], "type": "Conv2D", "id": "MobilenetV1/MobilenetV1/Conv2d_0/Relu6"}, {"outputShape": [{"dims": ["1", "112", "112", "32"]}], "name": "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/Relu6", "output": ["MobilenetV1/MobilenetV1/Conv2d_1_depthwise/Relu6:0"], "node_type": "op", "arg": [{"i": "3", "name": "T"}, {"i": "0", "name": "framework_type"}, {"i": "1000", "name": "data_format"}, {"i": "1", "name": "padding"}, {"name": "strides", "ints": ["1", "1"]}, {"name": "dilations", "ints": ["1", "1"]}, {"s": "UkVMVVg=", "name": "activation"}, {"name": "max_limit", "f": 6.0}], "input": ["MobilenetV1/MobilenetV1/Conv2d_0/Relu6:0", "MobilenetV1/Conv2d_1_depthwise/depthwise_weights:0", "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/depthwise_bn_offset:0"], "type": "DepthwiseConv2d", "id": "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/Relu6"}, {"outputShape": [{"dims": ["1", "112", "112", "64"]}], "name": "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/Relu6", "output": ["MobilenetV1/MobilenetV1/Conv2d_1_pointwise/Relu6:0"], "node_type": "op", "arg": [{"i": "3", "name": "T"}, {"i": "0", "name": "framework_type"}, {"i": "1000", "name": "data_format"}, {"i": "1", "name": "padding"}, {"name": "strides", "ints": ["1", "1"]}, {"name": "dilations", "ints": ["1", "1"]}, {"s": "UkVMVVg=", "name": "activation"}, {"name": "max_limit", "f": 6.0}], "input": ["MobilenetV1/MobilenetV1/Conv2d_1_depthwise/Relu6:0", "MobilenetV1/Conv2d_1_pointwise/weights:0", "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/Conv2D_bn_offset:0"], "type": "Conv2D", "id": "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/Relu6"}, {"outputShape": [{"dims": ["1", "56", "56", "64"]}], "name": "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/Relu6", "output": ["MobilenetV1/MobilenetV1/Conv2d_2_depthwise/Relu6:0"], "node_type": "op", "arg": [{"i": "3", "name": "T"}, {"i": "0", "name": "framework_type"}, {"i": "1000", "name": "data_format"}, {"i": "1", "name": "padding"}, {"name": "strides", "ints": ["2", "2"]}, {"name": "dilations", "ints": ["1", "1"]}, {"s": "UkVMVVg=", "name": "activation"}, {"name": "max_limit", "f": 6.0}], "input": ["MobilenetV1/MobilenetV1/Conv2d_1_pointwise/Relu6:0", "MobilenetV1/Conv2d_2_depthwise/depthwise_weights:0", "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/depthwise_bn_offset:0"], "type": "DepthwiseConv2d", "id": "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/Relu6"}, {"outputShape": [{"dims": ["1", "56", "56", "128"]}], "name": "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/Relu6", "output": ["MobilenetV1/MobilenetV1/Conv2d_2_pointwise/Relu6:0"], "node_type": "op", "arg": [{"i": "3", "name": "T"}, {"i": "0", "name": "framework_type"}, {"i": "1000", "name": "data_format"}, {"i": "1", "name": "padding"}, {"name": "strides", "ints": ["1", "1"]}, {"name": "dilations", "ints": ["1", "1"]}, {"s": "UkVMVVg=", "name": "activation"}, {"name": "max_limit", "f": 6.0}], "input": ["MobilenetV1/MobilenetV1/Conv2d_2_depthwise/Relu6:0", "MobilenetV1/Conv2d_2_pointwise/weights:0", "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/Conv2D_bn_offset:0"], "type": "Conv2D", "id": "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/Relu6"}, {"outputShape": [{"dims": ["1", "56", "56", "128"]}], "name": "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/Relu6", "output": ["MobilenetV1/MobilenetV1/Conv2d_3_depthwise/Relu6:0"], "node_type": "op", "arg": [{"i": "3", "name": "T"}, {"i": "0", "name": "framework_type"}, {"i": "1000", "name": "data_format"}, {"i": "1", "name": "padding"}, {"name": "strides", "ints": ["1", "1"]}, {"name": "dilations", "ints": ["1", "1"]}, {"s": "UkVMVVg=", "name": "activation"}, {"name": "max_limit", "f": 6.0}], "input": ["MobilenetV1/MobilenetV1/Conv2d_2_pointwise/Relu6:0", "MobilenetV1/Conv2d_3_depthwise/depthwise_weights:0", "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/depthwise_bn_offset:0"], "type": "DepthwiseConv2d", "id": "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/Relu6"}, {"outputShape": [{"dims": ["1", "56", "56", "128"]}], "name": "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/Relu6", "output": ["MobilenetV1/MobilenetV1/Conv2d_3_pointwise/Relu6:0"], "node_type": "op", "arg": [{"i": "3", "name": "T"}, {"i": "0", "name": "framework_type"}, {"i": "1000", "name": "data_format"}, {"i": "1", "name": "padding"}, {"name": "strides", "ints": ["1", "1"]}, {"name": "dilations", "ints": ["1", "1"]}, {"s": "UkVMVVg=", "name": "activation"}, {"name": "max_limit", "f": 6.0}], "input": ["MobilenetV1/MobilenetV1/Conv2d_3_depthwise/Relu6:0", "MobilenetV1/Conv2d_3_pointwise/weights:0", "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/Conv2D_bn_offset:0"], "type": "Conv2D", "id": "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/Relu6"}, {"outputShape": [{"dims": ["1", "28", "28", "128"]}], "name": "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/Relu6", "output": ["MobilenetV1/MobilenetV1/Conv2d_4_depthwise/Relu6:0"], "node_type": "op", "arg": [{"i": "3", "name": "T"}, {"i": "0", "name": "framework_type"}, {"i": "1000", "name": "data_format"}, {"i": "1", "name": "padding"}, {"name": "strides", "ints": ["2", "2"]}, {"name": "dilations", "ints": ["1", "1"]}, {"s": "UkVMVVg=", "name": "activation"}, {"name": "max_limit", "f": 6.0}], "input": ["MobilenetV1/MobilenetV1/Conv2d_3_pointwise/Relu6:0", "MobilenetV1/Conv2d_4_depthwise/depthwise_weights:0", "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/depthwise_bn_offset:0"], "type": "DepthwiseConv2d", "id": "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/Relu6"}, {"outputShape": [{"dims": ["1", "28", "28", "256"]}], "name": "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/Relu6", "output": ["MobilenetV1/MobilenetV1/Conv2d_4_pointwise/Relu6:0"], "node_type": "op", "arg": [{"i": "3", "name": "T"}, {"i": "0", "name": "framework_type"}, {"i": "1000", "name": "data_format"}, {"i": "1", "name": "padding"}, {"name": "strides", "ints": ["1", "1"]}, {"name": "dilations", "ints": ["1", "1"]}, {"s": "UkVMVVg=", "name": "activation"}, {"name": "max_limit", "f": 6.0}], "input": ["MobilenetV1/MobilenetV1/Conv2d_4_depthwise/Relu6:0", "MobilenetV1/Conv2d_4_pointwise/weights:0", "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/Conv2D_bn_offset:0"], "type": "Conv2D", "id": "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/Relu6"}, {"outputShape": [{"dims": ["1", "28", "28", "256"]}], "name": "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/Relu6", "output": ["MobilenetV1/MobilenetV1/Conv2d_5_depthwise/Relu6:0"], "node_type": "op", "arg": [{"i": "3", "name": "T"}, {"i": "0", "name": "framework_type"}, {"i": "1000", "name": "data_format"}, {"i": "1", "name": "padding"}, {"name": "strides", "ints": ["1", "1"]}, {"name": "dilations", "ints": ["1", "1"]}, {"s": "UkVMVVg=", "name": "activation"}, {"name": "max_limit", "f": 6.0}], "input": ["MobilenetV1/MobilenetV1/Conv2d_4_pointwise/Relu6:0", "MobilenetV1/Conv2d_5_depthwise/depthwise_weights:0", "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/depthwise_bn_offset:0"], "type": "DepthwiseConv2d", "id": "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/Relu6"}, {"outputShape": [{"dims": ["1", "28", "28", "256"]}], "name": "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/Relu6", "output": ["MobilenetV1/MobilenetV1/Conv2d_5_pointwise/Relu6:0"], "node_type": "op", "arg": [{"i": "3", "name": "T"}, {"i": "0", "name": "framework_type"}, {"i": "1000", "name": "data_format"}, {"i": "1", "name": "padding"}, {"name": "strides", "ints": ["1", "1"]}, {"name": "dilations", "ints": ["1", "1"]}, {"s": "UkVMVVg=", "name": "activation"}, {"name": "max_limit", "f": 6.0}], "input": ["MobilenetV1/MobilenetV1/Conv2d_5_depthwise/Relu6:0", "MobilenetV1/Conv2d_5_pointwise/weights:0", "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/Conv2D_bn_offset:0"], "type": "Conv2D", "id": "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/Relu6"}, {"outputShape": [{"dims": ["1", "14", "14", "256"]}], "name": "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/Relu6", "output": ["MobilenetV1/MobilenetV1/Conv2d_6_depthwise/Relu6:0"], "node_type": "op", "arg": [{"i": "3", "name": "T"}, {"i": "0", "name": "framework_type"}, {"i": "1000", "name": "data_format"}, {"i": "1", "name": "padding"}, {"name": "strides", "ints": ["2", "2"]}, {"name": "dilations", "ints": ["1", "1"]}, {"s": "UkVMVVg=", "name": "activation"}, {"name": "max_limit", "f": 6.0}], "input": ["MobilenetV1/MobilenetV1/Conv2d_5_pointwise/Relu6:0", "MobilenetV1/Conv2d_6_depthwise/depthwise_weights:0", "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/depthwise_bn_offset:0"], "type": "DepthwiseConv2d", "id": "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/Relu6"}, {"outputShape": [{"dims": ["1", "14", "14", "512"]}], "name": "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/Relu6", "output": ["MobilenetV1/MobilenetV1/Conv2d_6_pointwise/Relu6:0"], "node_type": "op", "arg": [{"i": "3", "name": "T"}, {"i": "0", "name": "framework_type"}, {"i": "1000", "name": "data_format"}, {"i": "1", "name": "padding"}, {"name": "strides", "ints": ["1", "1"]}, {"name": "dilations", "ints": ["1", "1"]}, {"s": "UkVMVVg=", "name": "activation"}, {"name": "max_limit", "f": 6.0}], "input": ["MobilenetV1/MobilenetV1/Conv2d_6_depthwise/Relu6:0", "MobilenetV1/Conv2d_6_pointwise/weights:0", "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/Conv2D_bn_offset:0"], "type": "Conv2D", "id": "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/Relu6"}, {"outputShape": [{"dims": ["1", "14", "14", "512"]}], "name": "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/Relu6", "output": ["MobilenetV1/MobilenetV1/Conv2d_7_depthwise/Relu6:0"], "node_type": "op", "arg": [{"i": "3", "name": "T"}, {"i": "0", "name": "framework_type"}, {"i": "1000", "name": "data_format"}, {"i": "1", "name": "padding"}, {"name": "strides", "ints": ["1", "1"]}, {"name": "dilations", "ints": ["1", "1"]}, {"s": "UkVMVVg=", "name": "activation"}, {"name": "max_limit", "f": 6.0}], "input": ["MobilenetV1/MobilenetV1/Conv2d_6_pointwise/Relu6:0", "MobilenetV1/Conv2d_7_depthwise/depthwise_weights:0", "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/depthwise_bn_offset:0"], "type": "DepthwiseConv2d", "id": "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/Relu6"}, {"outputShape": [{"dims": ["1", "14", "14", "512"]}], "name": "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/Relu6", "output": ["MobilenetV1/MobilenetV1/Conv2d_7_pointwise/Relu6:0"], "node_type": "op", "arg": [{"i": "3", "name": "T"}, {"i": "0", "name": "framework_type"}, {"i": "1000", "name": "data_format"}, {"i": "1", "name": "padding"}, {"name": "strides", "ints": ["1", "1"]}, {"name": "dilations", "ints": ["1", "1"]}, {"s": "UkVMVVg=", "name": "activation"}, {"name": "max_limit", "f": 6.0}], "input": ["MobilenetV1/MobilenetV1/Conv2d_7_depthwise/Relu6:0", "MobilenetV1/Conv2d_7_pointwise/weights:0", "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/Conv2D_bn_offset:0"], "type": "Conv2D", "id": "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/Relu6"}, {"outputShape": [{"dims": ["1", "14", "14", "512"]}], "name": "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/Relu6", "output": ["MobilenetV1/MobilenetV1/Conv2d_8_depthwise/Relu6:0"], "node_type": "op", "arg": [{"i": "3", "name": "T"}, {"i": "0", "name": "framework_type"}, {"i": "1000", "name": "data_format"}, {"i": "1", "name": "padding"}, {"name": "strides", "ints": ["1", "1"]}, {"name": "dilations", "ints": ["1", "1"]}, {"s": "UkVMVVg=", "name": "activation"}, {"name": "max_limit", "f": 6.0}], "input": ["MobilenetV1/MobilenetV1/Conv2d_7_pointwise/Relu6:0", "MobilenetV1/Conv2d_8_depthwise/depthwise_weights:0", "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/depthwise_bn_offset:0"], "type": "DepthwiseConv2d", "id": "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/Relu6"}, {"outputShape": [{"dims": ["1", "14", "14", "512"]}], "name": "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/Relu6", "output": ["MobilenetV1/MobilenetV1/Conv2d_8_pointwise/Relu6:0"], "node_type": "op", "arg": [{"i": "3", "name": "T"}, {"i": "0", "name": "framework_type"}, {"i": "1000", "name": "data_format"}, {"i": "1", "name": "padding"}, {"name": "strides", "ints": ["1", "1"]}, {"name": "dilations", "ints": ["1", "1"]}, {"s": "UkVMVVg=", "name": "activation"}, {"name": "max_limit", "f": 6.0}], "input": ["MobilenetV1/MobilenetV1/Conv2d_8_depthwise/Relu6:0", "MobilenetV1/Conv2d_8_pointwise/weights:0", "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/Conv2D_bn_offset:0"], "type": "Conv2D", "id": "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/Relu6"}, {"outputShape": [{"dims": ["1", "14", "14", "512"]}], "name": "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/Relu6", "output": ["MobilenetV1/MobilenetV1/Conv2d_9_depthwise/Relu6:0"], "node_type": "op", "arg": [{"i": "3", "name": "T"}, {"i": "0", "name": "framework_type"}, {"i": "1000", "name": "data_format"}, {"i": "1", "name": "padding"}, {"name": "strides", "ints": ["1", "1"]}, {"name": "dilations", "ints": ["1", "1"]}, {"s": "UkVMVVg=", "name": "activation"}, {"name": "max_limit", "f": 6.0}], "input": ["MobilenetV1/MobilenetV1/Conv2d_8_pointwise/Relu6:0", "MobilenetV1/Conv2d_9_depthwise/depthwise_weights:0", "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/depthwise_bn_offset:0"], "type": "DepthwiseConv2d", "id": "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/Relu6"}, {"outputShape": [{"dims": ["1", "14", "14", "512"]}], "name": "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/Relu6", "output": ["MobilenetV1/MobilenetV1/Conv2d_9_pointwise/Relu6:0"], "node_type": "op", "arg": [{"i": "3", "name": "T"}, {"i": "0", "name": "framework_type"}, {"i": "1000", "name": "data_format"}, {"i": "1", "name": "padding"}, {"name": "strides", "ints": ["1", "1"]}, {"name": "dilations", "ints": ["1", "1"]}, {"s": "UkVMVVg=", "name": "activation"}, {"name": "max_limit", "f": 6.0}], "input": ["MobilenetV1/MobilenetV1/Conv2d_9_depthwise/Relu6:0", "MobilenetV1/Conv2d_9_pointwise/weights:0", "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/Conv2D_bn_offset:0"], "type": "Conv2D", "id": "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/Relu6"}, {"outputShape": [{"dims": ["1", "14", "14", "512"]}], "name": "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/Relu6", "output": ["MobilenetV1/MobilenetV1/Conv2d_10_depthwise/Relu6:0"], "node_type": "op", "arg": [{"i": "3", "name": "T"}, {"i": "0", "name": "framework_type"}, {"i": "1000", "name": "data_format"}, {"i": "1", "name": "padding"}, {"name": "strides", "ints": ["1", "1"]}, {"name": "dilations", "ints": ["1", "1"]}, {"s": "UkVMVVg=", "name": "activation"}, {"name": "max_limit", "f": 6.0}], "input": ["MobilenetV1/MobilenetV1/Conv2d_9_pointwise/Relu6:0", "MobilenetV1/Conv2d_10_depthwise/depthwise_weights:0", "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/depthwise_bn_offset:0"], "type": "DepthwiseConv2d", "id": "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/Relu6"}, {"outputShape": [{"dims": ["1", "14", "14", "512"]}], "name": "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/Relu6", "output": ["MobilenetV1/MobilenetV1/Conv2d_10_pointwise/Relu6:0"], "node_type": "op", "arg": [{"i": "3", "name": "T"}, {"i": "0", "name": "framework_type"}, {"i": "1000", "name": "data_format"}, {"i": "1", "name": "padding"}, {"name": "strides", "ints": ["1", "1"]}, {"name": "dilations", "ints": ["1", "1"]}, {"s": "UkVMVVg=", "name": "activation"}, {"name": "max_limit", "f": 6.0}], "input": ["MobilenetV1/MobilenetV1/Conv2d_10_depthwise/Relu6:0", "MobilenetV1/Conv2d_10_pointwise/weights:0", "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/Conv2D_bn_offset:0"], "type": "Conv2D", "id": "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/Relu6"}, {"outputShape": [{"dims": ["1", "14", "14", "512"]}], "name": "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/Relu6", "output": ["MobilenetV1/MobilenetV1/Conv2d_11_depthwise/Relu6:0"], "node_type": "op", "arg": [{"i": "3", "name": "T"}, {"i": "0", "name": "framework_type"}, {"i": "1000", "name": "data_format"}, {"i": "1", "name": "padding"}, {"name": "strides", "ints": ["1", "1"]}, {"name": "dilations", "ints": ["1", "1"]}, {"s": "UkVMVVg=", "name": "activation"}, {"name": "max_limit", "f": 6.0}], "input": ["MobilenetV1/MobilenetV1/Conv2d_10_pointwise/Relu6:0", "MobilenetV1/Conv2d_11_depthwise/depthwise_weights:0", "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/depthwise_bn_offset:0"], "type": "DepthwiseConv2d", "id": "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/Relu6"}, {"outputShape": [{"dims": ["1", "14", "14", "512"]}], "name": "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/Relu6", "output": ["MobilenetV1/MobilenetV1/Conv2d_11_pointwise/Relu6:0"], "node_type": "op", "arg": [{"i": "3", "name": "T"}, {"i": "0", "name": "framework_type"}, {"i": "1000", "name": "data_format"}, {"i": "1", "name": "padding"}, {"name": "strides", "ints": ["1", "1"]}, {"name": "dilations", "ints": ["1", "1"]}, {"s": "UkVMVVg=", "name": "activation"}, {"name": "max_limit", "f": 6.0}], "input": ["MobilenetV1/MobilenetV1/Conv2d_11_depthwise/Relu6:0", "MobilenetV1/Conv2d_11_pointwise/weights:0", "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/Conv2D_bn_offset:0"], "type": "Conv2D", "id": "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/Relu6"}, {"outputShape": [{"dims": ["1", "7", "7", "512"]}], "name": "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/Relu6", "output": ["MobilenetV1/MobilenetV1/Conv2d_12_depthwise/Relu6:0"], "node_type": "op", "arg": [{"i": "3", "name": "T"}, {"i": "0", "name": "framework_type"}, {"i": "1000", "name": "data_format"}, {"i": "1", "name": "padding"}, {"name": "strides", "ints": ["2", "2"]}, {"name": "dilations", "ints": ["1", "1"]}, {"s": "UkVMVVg=", "name": "activation"}, {"name": "max_limit", "f": 6.0}], "input": ["MobilenetV1/MobilenetV1/Conv2d_11_pointwise/Relu6:0", "MobilenetV1/Conv2d_12_depthwise/depthwise_weights:0", "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/depthwise_bn_offset:0"], "type": "DepthwiseConv2d", "id": "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/Relu6"}, {"outputShape": [{"dims": ["1", "7", "7", "1024"]}], "name": "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/Relu6", "output": ["MobilenetV1/MobilenetV1/Conv2d_12_pointwise/Relu6:0"], "node_type": "op", "arg": [{"i": "3", "name": "T"}, {"i": "0", "name": "framework_type"}, {"i": "1000", "name": "data_format"}, {"i": "1", "name": "padding"}, {"name": "strides", "ints": ["1", "1"]}, {"name": "dilations", "ints": ["1", "1"]}, {"s": "UkVMVVg=", "name": "activation"}, {"name": "max_limit", "f": 6.0}], "input": ["MobilenetV1/MobilenetV1/Conv2d_12_depthwise/Relu6:0", "MobilenetV1/Conv2d_12_pointwise/weights:0", "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/Conv2D_bn_offset:0"], "type": "Conv2D", "id": "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/Relu6"}, {"outputShape": [{"dims": ["1", "7", "7", "1024"]}], "name": "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/Relu6", "output": ["MobilenetV1/MobilenetV1/Conv2d_13_depthwise/Relu6:0"], "node_type": "op", "arg": [{"i": "3", "name": "T"}, {"i": "0", "name": "framework_type"}, {"i": "1000", "name": "data_format"}, {"i": "1", "name": "padding"}, {"name": "strides", "ints": ["1", "1"]}, {"name": "dilations", "ints": ["1", "1"]}, {"s": "UkVMVVg=", "name": "activation"}, {"name": "max_limit", "f": 6.0}], "input": ["MobilenetV1/MobilenetV1/Conv2d_12_pointwise/Relu6:0", "MobilenetV1/Conv2d_13_depthwise/depthwise_weights:0", "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/depthwise_bn_offset:0"], "type": "DepthwiseConv2d", "id": "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/Relu6"}, {"outputShape": [{"dims": ["1", "7", "7", "1024"]}], "name": "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/Relu6", "output": ["MobilenetV1/MobilenetV1/Conv2d_13_pointwise/Relu6:0"], "node_type": "op", "arg": [{"i": "3", "name": "T"}, {"i": "0", "name": "framework_type"}, {"i": "1000", "name": "data_format"}, {"i": "1", "name": "padding"}, {"name": "strides", "ints": ["1", "1"]}, {"name": "dilations", "ints": ["1", "1"]}, {"s": "UkVMVVg=", "name": "activation"}, {"name": "max_limit", "f": 6.0}], "input": ["MobilenetV1/MobilenetV1/Conv2d_13_depthwise/Relu6:0", "MobilenetV1/Conv2d_13_pointwise/weights:0", "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/Conv2D_bn_offset:0"], "type": "Conv2D", "id": "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/Relu6"}, {"outputShape": [{"dims": ["1", "1", "1", "1024"]}], "name": "MobilenetV1/Logits/AvgPool_1a/AvgPool", "output": ["MobilenetV1/Logits/AvgPool_1a/AvgPool:0"], "node_type": "op", "arg": [{"i": "3", "name": "T"}, {"i": "0", "name": "framework_type"}, {"i": "1000", "name": "data_format"}, {"i": "1", "name": "pooling_type"}, {"i": "0", "name": "padding"}, {"name": "strides", "ints": ["2", "2"]}, {"name": "kernels", "ints": ["7", "7"]}], "input": ["MobilenetV1/MobilenetV1/Conv2d_13_pointwise/Relu6:0"], "type": "Pooling", "id": "MobilenetV1/Logits/AvgPool_1a/AvgPool"}, {"outputShape": [{"dims": ["1", "1", "1", "1001"]}], "name": "MobilenetV1/Logits/Conv2d_1c_1x1/BiasAdd", "output": ["MobilenetV1/Logits/Conv2d_1c_1x1/BiasAdd:0"], "node_type": "op", "arg": [{"i": "3", "name": "T"}, {"i": "0", "name": "framework_type"}, {"i": "1000", "name": "data_format"}, {"i": "1", "name": "padding"}, {"name": "strides", "ints": ["1", "1"]}, {"name": "dilations", "ints": ["1", "1"]}], "input": ["MobilenetV1/Logits/AvgPool_1a/AvgPool:0", "MobilenetV1/Logits/Conv2d_1c_1x1/weights:0", "MobilenetV1/Logits/Conv2d_1c_1x1/biases:0"], "type": "Conv2D", "id": "MobilenetV1/Logits/Conv2d_1c_1x1/BiasAdd"}, {"outputShape": [{"dims": ["1", "1001"]}], "name": "MobilenetV1/Logits/SpatialSqueeze", "output": ["MobilenetV1/Logits/SpatialSqueeze:0"], "node_type": "op", "arg": [{"i": "3", "name": "T"}, {"i": "0", "name": "framework_type"}, {"i": "1000", "name": "data_format"}, {"name": "axis", "ints": ["1", "2"]}, {"i": "1", "name": "has_data_format"}], "input": ["MobilenetV1/Logits/Conv2d_1c_1x1/BiasAdd:0"], "type": "Squeeze", "id": "MobilenetV1/Logits/SpatialSqueeze"}, {"outputShape": [{"dims": ["1", "1001"]}], "name": "MobilenetV1/Predictions/Softmax", "output": ["MobilenetV1/Predictions/Reshape_1"], "node_type": "op", "arg": [{"i": "3", "name": "T"}, {"i": "0", "name": "framework_type"}, {"i": "1000", "name": "data_format"}, {"i": "1", "name": "has_data_format"}], "input": ["MobilenetV1/Logits/SpatialSqueeze:0"], "type": "Softmax", "id": "MobilenetV1/Predictions/Softmax"}, {"name": "MobilenetV1/Predictions/Reshape/shape:0", "dataType": "DT_INT32", "dims": ["2"], "node_type": "tensor", "int32Data": [-1, 1001], "id": "MobilenetV1/Predictions/Reshape/shape:0"}, {"name": "MobilenetV1/Logits/Conv2d_1c_1x1/biases:0", "dataType": "DT_FLOAT", "dims": ["1001"], "node_type": "tensor", "id": "MobilenetV1/Logits/Conv2d_1c_1x1/biases:0"}, {"name": "MobilenetV1/Logits/Conv2d_1c_1x1/weights:0", "dataType": "DT_FLOAT", "dims": ["1001", "1024", "1", "1"], "node_type": "tensor", "id": "MobilenetV1/Logits/Conv2d_1c_1x1/weights:0"}, {"name": "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/Conv2D_bn_offset:0", "dataType": "DT_FLOAT", "dims": ["1024"], "node_type": "tensor", "id": "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/Conv2D_bn_offset:0"}, {"name": "MobilenetV1/Conv2d_13_pointwise/weights:0", "dataType": "DT_FLOAT", "dims": ["1024", "1024", "1", "1"], "node_type": "tensor", "id": "MobilenetV1/Conv2d_13_pointwise/weights:0"}, {"name": "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/depthwise_bn_offset:0", "dataType": "DT_FLOAT", "dims": ["1024"], "node_type": "tensor", "id": "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/depthwise_bn_offset:0"}, {"name": "MobilenetV1/Conv2d_13_depthwise/depthwise_weights:0", "dataType": "DT_FLOAT", "dims": ["1", "1024", "3", "3"], "node_type": "tensor", "id": "MobilenetV1/Conv2d_13_depthwise/depthwise_weights:0"}, {"name": "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/Conv2D_bn_offset:0", "dataType": "DT_FLOAT", "dims": ["1024"], "node_type": "tensor", "id": "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/Conv2D_bn_offset:0"}, {"name": "MobilenetV1/Conv2d_12_pointwise/weights:0", "dataType": "DT_FLOAT", "dims": ["1024", "512", "1", "1"], "node_type": "tensor", "id": "MobilenetV1/Conv2d_12_pointwise/weights:0"}, {"name": "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/depthwise_bn_offset:0", "dataType": "DT_FLOAT", "dims": ["512"], "node_type": "tensor", "id": "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/depthwise_bn_offset:0"}, {"name": "MobilenetV1/Conv2d_12_depthwise/depthwise_weights:0", "dataType": "DT_FLOAT", "dims": ["1", "512", "3", "3"], "node_type": "tensor", "id": "MobilenetV1/Conv2d_12_depthwise/depthwise_weights:0"}, {"name": "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/Conv2D_bn_offset:0", "dataType": "DT_FLOAT", "dims": ["512"], "node_type": "tensor", "id": "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/Conv2D_bn_offset:0"}, {"name": "MobilenetV1/Conv2d_11_pointwise/weights:0", "dataType": "DT_FLOAT", "dims": ["512", "512", "1", "1"], "node_type": "tensor", "id": "MobilenetV1/Conv2d_11_pointwise/weights:0"}, {"name": "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/depthwise_bn_offset:0", "dataType": "DT_FLOAT", "dims": ["512"], "node_type": "tensor", "id": "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/depthwise_bn_offset:0"}, {"name": "MobilenetV1/Conv2d_11_depthwise/depthwise_weights:0", "dataType": "DT_FLOAT", "dims": ["1", "512", "3", "3"], "node_type": "tensor", "id": "MobilenetV1/Conv2d_11_depthwise/depthwise_weights:0"}, {"name": "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/Conv2D_bn_offset:0", "dataType": "DT_FLOAT", "dims": ["512"], "node_type": "tensor", "id": "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/Conv2D_bn_offset:0"}, {"name": "MobilenetV1/Conv2d_10_pointwise/weights:0", "dataType": "DT_FLOAT", "dims": ["512", "512", "1", "1"], "node_type": "tensor", "id": "MobilenetV1/Conv2d_10_pointwise/weights:0"}, {"name": "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/depthwise_bn_offset:0", "dataType": "DT_FLOAT", "dims": ["512"], "node_type": "tensor", "id": "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/depthwise_bn_offset:0"}, {"name": "MobilenetV1/Conv2d_10_depthwise/depthwise_weights:0", "dataType": "DT_FLOAT", "dims": ["1", "512", "3", "3"], "node_type": "tensor", "id": "MobilenetV1/Conv2d_10_depthwise/depthwise_weights:0"}, {"name": "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/Conv2D_bn_offset:0", "dataType": "DT_FLOAT", "dims": ["512"], "node_type": "tensor", "id": "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/Conv2D_bn_offset:0"}, {"name": "MobilenetV1/Conv2d_9_pointwise/weights:0", "dataType": "DT_FLOAT", "dims": ["512", "512", "1", "1"], "node_type": "tensor", "id": "MobilenetV1/Conv2d_9_pointwise/weights:0"}, {"name": "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/depthwise_bn_offset:0", "dataType": "DT_FLOAT", "dims": ["512"], "node_type": "tensor", "id": "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/depthwise_bn_offset:0"}, {"name": "MobilenetV1/Conv2d_9_depthwise/depthwise_weights:0", "dataType": "DT_FLOAT", "dims": ["1", "512", "3", "3"], "node_type": "tensor", "id": "MobilenetV1/Conv2d_9_depthwise/depthwise_weights:0"}, {"name": "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/Conv2D_bn_offset:0", "dataType": "DT_FLOAT", "dims": ["512"], "node_type": "tensor", "id": "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/Conv2D_bn_offset:0"}, {"name": "MobilenetV1/Conv2d_8_pointwise/weights:0", "dataType": "DT_FLOAT", "dims": ["512", "512", "1", "1"], "node_type": "tensor", "id": "MobilenetV1/Conv2d_8_pointwise/weights:0"}, {"name": "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/depthwise_bn_offset:0", "dataType": "DT_FLOAT", "dims": ["512"], "node_type": "tensor", "id": "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/depthwise_bn_offset:0"}, {"name": "MobilenetV1/Conv2d_8_depthwise/depthwise_weights:0", "dataType": "DT_FLOAT", "dims": ["1", "512", "3", "3"], "node_type": "tensor", "id": "MobilenetV1/Conv2d_8_depthwise/depthwise_weights:0"}, {"name": "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/Conv2D_bn_offset:0", "dataType": "DT_FLOAT", "dims": ["512"], "node_type": "tensor", "id": "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/Conv2D_bn_offset:0"}, {"name": "MobilenetV1/Conv2d_7_pointwise/weights:0", "dataType": "DT_FLOAT", "dims": ["512", "512", "1", "1"], "node_type": "tensor", "id": "MobilenetV1/Conv2d_7_pointwise/weights:0"}, {"name": "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/depthwise_bn_offset:0", "dataType": "DT_FLOAT", "dims": ["512"], "node_type": "tensor", "id": "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/depthwise_bn_offset:0"}, {"name": "MobilenetV1/Conv2d_7_depthwise/depthwise_weights:0", "dataType": "DT_FLOAT", "dims": ["1", "512", "3", "3"], "node_type": "tensor", "id": "MobilenetV1/Conv2d_7_depthwise/depthwise_weights:0"}, {"name": "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/Conv2D_bn_offset:0", "dataType": "DT_FLOAT", "dims": ["512"], "node_type": "tensor", "id": "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/Conv2D_bn_offset:0"}, {"name": "MobilenetV1/Conv2d_6_pointwise/weights:0", "dataType": "DT_FLOAT", "dims": ["512", "256", "1", "1"], "node_type": "tensor", "id": "MobilenetV1/Conv2d_6_pointwise/weights:0"}, {"name": "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/depthwise_bn_offset:0", "dataType": "DT_FLOAT", "dims": ["256"], "node_type": "tensor", "id": "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/depthwise_bn_offset:0"}, {"name": "MobilenetV1/Conv2d_6_depthwise/depthwise_weights:0", "dataType": "DT_FLOAT", "dims": ["1", "256", "3", "3"], "node_type": "tensor", "id": "MobilenetV1/Conv2d_6_depthwise/depthwise_weights:0"}, {"name": "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/Conv2D_bn_offset:0", "dataType": "DT_FLOAT", "dims": ["256"], "node_type": "tensor", "id": "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/Conv2D_bn_offset:0"}, {"name": "MobilenetV1/Conv2d_5_pointwise/weights:0", "dataType": "DT_FLOAT", "dims": ["256", "256", "1", "1"], "node_type": "tensor", "id": "MobilenetV1/Conv2d_5_pointwise/weights:0"}, {"name": "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/depthwise_bn_offset:0", "dataType": "DT_FLOAT", "dims": ["256"], "node_type": "tensor", "id": "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/depthwise_bn_offset:0"}, {"name": "MobilenetV1/Conv2d_5_depthwise/depthwise_weights:0", "dataType": "DT_FLOAT", "dims": ["1", "256", "3", "3"], "node_type": "tensor", "id": "MobilenetV1/Conv2d_5_depthwise/depthwise_weights:0"}, {"name": "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/Conv2D_bn_offset:0", "dataType": "DT_FLOAT", "dims": ["256"], "node_type": "tensor", "id": "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/Conv2D_bn_offset:0"}, {"name": "MobilenetV1/Conv2d_4_pointwise/weights:0", "dataType": "DT_FLOAT", "dims": ["256", "128", "1", "1"], "node_type": "tensor", "id": "MobilenetV1/Conv2d_4_pointwise/weights:0"}, {"name": "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/depthwise_bn_offset:0", "dataType": "DT_FLOAT", "dims": ["128"], "node_type": "tensor", "id": "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/depthwise_bn_offset:0"}, {"name": "MobilenetV1/Conv2d_4_depthwise/depthwise_weights:0", "dataType": "DT_FLOAT", "dims": ["1", "128", "3", "3"], "node_type": "tensor", "id": "MobilenetV1/Conv2d_4_depthwise/depthwise_weights:0"}, {"name": "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/Conv2D_bn_offset:0", "dataType": "DT_FLOAT", "dims": ["128"], "node_type": "tensor", "id": "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/Conv2D_bn_offset:0"}, {"name": "MobilenetV1/Conv2d_3_pointwise/weights:0", "dataType": "DT_FLOAT", "dims": ["128", "128", "1", "1"], "node_type": "tensor", "id": "MobilenetV1/Conv2d_3_pointwise/weights:0"}, {"name": "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/depthwise_bn_offset:0", "dataType": "DT_FLOAT", "dims": ["128"], "node_type": "tensor", "id": "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/depthwise_bn_offset:0"}, {"name": "MobilenetV1/Conv2d_3_depthwise/depthwise_weights:0", "dataType": "DT_FLOAT", "dims": ["1", "128", "3", "3"], "node_type": "tensor", "id": "MobilenetV1/Conv2d_3_depthwise/depthwise_weights:0"}, {"name": "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/Conv2D_bn_offset:0", "dataType": "DT_FLOAT", "dims": ["128"], "node_type": "tensor", "id": "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/Conv2D_bn_offset:0"}, {"name": "MobilenetV1/Conv2d_2_pointwise/weights:0", "dataType": "DT_FLOAT", "dims": ["128", "64", "1", "1"], "node_type": "tensor", "id": "MobilenetV1/Conv2d_2_pointwise/weights:0"}, {"name": "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/depthwise_bn_offset:0", "dataType": "DT_FLOAT", "dims": ["64"], "node_type": "tensor", "id": "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/depthwise_bn_offset:0"}, {"name": "MobilenetV1/Conv2d_2_depthwise/depthwise_weights:0", "dataType": "DT_FLOAT", "dims": ["1", "64", "3", "3"], "node_type": "tensor", "id": "MobilenetV1/Conv2d_2_depthwise/depthwise_weights:0"}, {"name": "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/Conv2D_bn_offset:0", "dataType": "DT_FLOAT", "dims": ["64"], "node_type": "tensor", "id": "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/Conv2D_bn_offset:0"}, {"name": "MobilenetV1/Conv2d_1_pointwise/weights:0", "dataType": "DT_FLOAT", "dims": ["64", "32", "1", "1"], "node_type": "tensor", "id": "MobilenetV1/Conv2d_1_pointwise/weights:0"}, {"name": "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/depthwise_bn_offset:0", "dataType": "DT_FLOAT", "dims": ["32"], "node_type": "tensor", "id": "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/depthwise_bn_offset:0"}, {"name": "MobilenetV1/Conv2d_1_depthwise/depthwise_weights:0", "dataType": "DT_FLOAT", "dims": ["1", "32", "3", "3"], "node_type": "tensor", "id": "MobilenetV1/Conv2d_1_depthwise/depthwise_weights:0"}, {"name": "MobilenetV1/MobilenetV1/Conv2d_0/Conv2D_bn_offset:0", "dataType": "DT_FLOAT", "dims": ["32"], "node_type": "tensor", "id": "MobilenetV1/MobilenetV1/Conv2d_0/Conv2D_bn_offset:0"}, {"name": "MobilenetV1/Conv2d_0/weights:0", "dataType": "DT_FLOAT", "dims": ["32", "3", "3", "3"], "node_type": "tensor", "id": "MobilenetV1/Conv2d_0/weights:0"}, {"node_type": "input", "id": "input", "name": "input"}], "links": [{"source": "input", "target": "MobilenetV1/MobilenetV1/Conv2d_0/Relu6"}, {"source": "MobilenetV1/Conv2d_0/weights:0", "target": "MobilenetV1/MobilenetV1/Conv2d_0/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_0/Conv2D_bn_offset:0", "target": "MobilenetV1/MobilenetV1/Conv2d_0/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_0/Relu6", "target": "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/Relu6"}, {"source": "MobilenetV1/Conv2d_1_depthwise/depthwise_weights:0", "target": "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/depthwise_bn_offset:0", "target": "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/Relu6", "target": "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/Relu6"}, {"source": "MobilenetV1/Conv2d_1_pointwise/weights:0", "target": "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/Conv2D_bn_offset:0", "target": "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/Relu6", "target": "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/Relu6"}, {"source": "MobilenetV1/Conv2d_2_depthwise/depthwise_weights:0", "target": "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/depthwise_bn_offset:0", "target": "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/Relu6", "target": "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/Relu6"}, {"source": "MobilenetV1/Conv2d_2_pointwise/weights:0", "target": "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/Conv2D_bn_offset:0", "target": "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/Relu6", "target": "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/Relu6"}, {"source": "MobilenetV1/Conv2d_3_depthwise/depthwise_weights:0", "target": "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/depthwise_bn_offset:0", "target": "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/Relu6", "target": "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/Relu6"}, {"source": "MobilenetV1/Conv2d_3_pointwise/weights:0", "target": "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/Conv2D_bn_offset:0", "target": "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/Relu6", "target": "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/Relu6"}, {"source": "MobilenetV1/Conv2d_4_depthwise/depthwise_weights:0", "target": "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/depthwise_bn_offset:0", "target": "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/Relu6", "target": "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/Relu6"}, {"source": "MobilenetV1/Conv2d_4_pointwise/weights:0", "target": "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/Conv2D_bn_offset:0", "target": "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/Relu6", "target": "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/Relu6"}, {"source": "MobilenetV1/Conv2d_5_depthwise/depthwise_weights:0", "target": "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/depthwise_bn_offset:0", "target": "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/Relu6", "target": "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/Relu6"}, {"source": "MobilenetV1/Conv2d_5_pointwise/weights:0", "target": "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/Conv2D_bn_offset:0", "target": "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/Relu6", "target": "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/Relu6"}, {"source": "MobilenetV1/Conv2d_6_depthwise/depthwise_weights:0", "target": "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/depthwise_bn_offset:0", "target": "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/Relu6", "target": "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/Relu6"}, {"source": "MobilenetV1/Conv2d_6_pointwise/weights:0", "target": "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/Conv2D_bn_offset:0", "target": "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/Relu6", "target": "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/Relu6"}, {"source": "MobilenetV1/Conv2d_7_depthwise/depthwise_weights:0", "target": "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/depthwise_bn_offset:0", "target": "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/Relu6", "target": "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/Relu6"}, {"source": "MobilenetV1/Conv2d_7_pointwise/weights:0", "target": "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/Conv2D_bn_offset:0", "target": "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/Relu6", "target": "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/Relu6"}, {"source": "MobilenetV1/Conv2d_8_depthwise/depthwise_weights:0", "target": "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/depthwise_bn_offset:0", "target": "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/Relu6", "target": "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/Relu6"}, {"source": "MobilenetV1/Conv2d_8_pointwise/weights:0", "target": "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/Conv2D_bn_offset:0", "target": "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/Relu6", "target": "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/Relu6"}, {"source": "MobilenetV1/Conv2d_9_depthwise/depthwise_weights:0", "target": "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/depthwise_bn_offset:0", "target": "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/Relu6", "target": "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/Relu6"}, {"source": "MobilenetV1/Conv2d_9_pointwise/weights:0", "target": "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/Conv2D_bn_offset:0", "target": "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/Relu6", "target": "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/Relu6"}, {"source": "MobilenetV1/Conv2d_10_depthwise/depthwise_weights:0", "target": "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/depthwise_bn_offset:0", "target": "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/Relu6", "target": "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/Relu6"}, {"source": "MobilenetV1/Conv2d_10_pointwise/weights:0", "target": "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/Conv2D_bn_offset:0", "target": "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/Relu6", "target": "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/Relu6"}, {"source": "MobilenetV1/Conv2d_11_depthwise/depthwise_weights:0", "target": "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/depthwise_bn_offset:0", "target": "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/Relu6", "target": "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/Relu6"}, {"source": "MobilenetV1/Conv2d_11_pointwise/weights:0", "target": "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/Conv2D_bn_offset:0", "target": "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/Relu6", "target": "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/Relu6"}, {"source": "MobilenetV1/Conv2d_12_depthwise/depthwise_weights:0", "target": "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/depthwise_bn_offset:0", "target": "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/Relu6", "target": "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/Relu6"}, {"source": "MobilenetV1/Conv2d_12_pointwise/weights:0", "target": "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/Conv2D_bn_offset:0", "target": "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/Relu6", "target": "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/Relu6"}, {"source": "MobilenetV1/Conv2d_13_depthwise/depthwise_weights:0", "target": "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/depthwise_bn_offset:0", "target": "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/Relu6", "target": "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/Relu6"}, {"source": "MobilenetV1/Conv2d_13_pointwise/weights:0", "target": "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/Conv2D_bn_offset:0", "target": "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/Relu6"}, {"source": "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/Relu6", "target": "MobilenetV1/Logits/AvgPool_1a/AvgPool"}, {"source": "MobilenetV1/Logits/AvgPool_1a/AvgPool", "target": "MobilenetV1/Logits/Conv2d_1c_1x1/BiasAdd"}, {"source": "MobilenetV1/Logits/Conv2d_1c_1x1/weights:0", "target": "MobilenetV1/Logits/Conv2d_1c_1x1/BiasAdd"}, {"source": "MobilenetV1/Logits/Conv2d_1c_1x1/biases:0", "target": "MobilenetV1/Logits/Conv2d_1c_1x1/BiasAdd"}, {"source": "MobilenetV1/Logits/Conv2d_1c_1x1/BiasAdd", "target": "MobilenetV1/Logits/SpatialSqueeze"}, {"source": "MobilenetV1/Logits/SpatialSqueeze", "target": "MobilenetV1/Predictions/Softmax"}]};
+
+
+    function create_table(divid, data, columns) {
+        var table = d3.select(divid).append("table");
+        var thead = table.append("thead");
+        var tbody = table.append("tbody");
+
+        thead.append("tr")
+            .selectAll("th")
+            .data(columns).enter()
+            .append("th")
+            .text(function (column) {
+                return column;
+            });
+
+        var tr = tbody.selectAll("tr")
+            .data(data)
+            .enter()
+            .append("tr");
+
+        var td = tr.selectAll("td")
+            .data(function (row) {
+                return columns.map(function (column) {
+                    return {column: column, value: row[column]};
+                });
+            })
+            .enter()
+            .append("td")
+            .text(function (d) {
+                return d.value;
+            });
+
+        return table;
+    }
+
+    nodes = graph["nodes"];
+    op_data = [];
+    tensor_data = [];
+
+    for (var i = 0; i < nodes.length; i++) {
+        var node = nodes[i];
+        if (node.node_type === "op") {
+            var output_shapes = [];
+            if (typeof node["outputShape"] !== "undefined") {
+                for (var j = 0; j < node["outputShape"].length; j++) {
+                    var output_shape = "";
+                    if (typeof node["outputShape"][j].dims !== "undefined") {
+                        console.log(node["outputShape"][j].dims);
+                        output_shape = node["outputShape"][j].dims.join(",");
+                    }
+                    output_shapes.push(output_shape);
+                }
+            }
+            var quantize_infos = [];
+            if (typeof node["quantizeInfo"] !== "undefined") {
+                for (var j = 0; j < node["quantizeInfo"].length; j++) {
+                    quantize_infos.push(
+                        "scale=" + node["quantizeInfo"][j]["scale"] +
+                        " zero=" + node["quantizeInfo"][j]["zeroPoint"] +
+                        " min=" + node["quantizeInfo"][j]["minval"] +
+                        " max=" + node["quantizeInfo"][j]["maxval"]);
+                }
+            }
+            op_data.push({
+                "idx": op_data.length,
+                "name": node["name"],
+                "type": node["type"],
+                "output_shape": output_shapes.join("; "),
+                "quantize_info": quantize_infos.join("; ")
+            });
+        } else if (node.node_type === "tensor") {
+            var quantize_info = "";
+            if (typeof node["scale"] !== "undefined") {
+                quantize_info = "scale=" + node["scale"] +
+                    " zero=" + node["zeroPoint"] +
+                    " min=" + node["minval"] +
+                    " max=" + node["maxval"];
+            }
+            var dims = "";
+            if (typeof node["dims"] != "undefined") {
+                dims = node["dims"].join(",");
+            }
+            tensor_data.push({
+                "idx": tensor_data.length,
+                "name": node["name"],
+                "data_type": node["dataType"],
+                "dims": dims,
+                "quantize_info": quantize_info
+
+            })
+        }
+    }
+    create_table("#op_table", op_data, ["idx", "name", "type",
+        "output_shape", "quantize_info"]);
+    create_table("#tensor_table", tensor_data, ["idx", "name", "data_type",
+        "dims", "quantize_info"]);
+
+
+    var svg = d3.select("#graph");
+    svg.append("svg:defs").append("svg:marker")
+        .attr("id", "arrow")
+        .attr("viewBox", "0 -5 10 10")
+        .attr('refX', 30)
+        .attr("markerWidth", 5)
+        .attr("markerHeight", 5)
+        .attr("orient", "auto")
+        .append("svg:path")
+        .attr("d", "M0,-5L10,0L0,5");
+
+    var width = svg.attr("width");
+    var height = svg.attr("height");
+
+    var is_mouse_down = false;
+    var mouse_x = 0;
+    var mouse_y = 0;
+    var view_box_x = 0;
+    var view_box_y = 0;
+    svg.on("mousedown", function () {
+        is_mouse_down = true;
+        mouse_x = d3.mouse(this)[0];
+        mouse_y = d3.mouse(this)[1];
+    });
+
+    svg.on("mouseup", function () {
+        is_mouse_down = false;
+        view_box_x = view_box_x - d3.mouse(this)[0] + mouse_x;
+        view_box_y = view_box_y - d3.mouse(this)[1] + mouse_y;
+        svg.attr("viewBox", view_box_x + " " + view_box_y + " "
+            + width + " " + height);
+    });
+
+    svg.on("mousemove", function () {
+        if (is_mouse_down) {
+            view_box_x = view_box_x - d3.mouse(this)[0] + mouse_x;
+            view_box_y = view_box_y - d3.mouse(this)[1] + mouse_y;
+            svg.attr("viewBox", view_box_x + " " + view_box_y + " "
+                + width + " " + height);
+        }
+    });
+
+    var simulation = d3.forceSimulation()
+        .force("link", d3.forceLink().id(function (d) {
+            return d.id;
+        }).distance(50))
+        .force("gravity", d3.forceManyBody().strength(-50))
+        .force("center", d3.forceCenter(0.5 * width, 0.5 * height));
+
+    var node = svg.selectAll(".nodes")
+        .data(graph.nodes)
+        .enter().append("g")
+        .attr("class", "nodes")
+        .call(d3.drag()
+            .on("start", function (d) {
+                if (!d3.event.active) simulation.alphaTarget(1.0).restart();
+                d.fx = d.x;
+                d.fy = d.y;
+            })
+            .on("drag", function (d) {
+                d.fx = d3.event.x;
+                d.fy = d3.event.y;
+            })
+            .on("end", function (d) {
+                if (!d3.event.active) simulation.alphaTarget(0);
+                d.fx = d.fy = null;
+            }))
+        .on("click", function (d) {
+            d3.select('#info').text(JSON.stringify(d, null, 2))
+        })
+
+    function shape_size(node_type) {
+        if (node_type === "op") return ["60px", "20px"];
+        else if (node_type === "input") return ["15px", "15px"];
+        else return ["5px", "5px"];
+    }
+    function color(node_type) {
+        if (node_type === "op") return "#3366cc";
+        else if (node_type === "input") return "#ff9900";
+        else return "#dc3912";
+    }
+    function font_size(node_type) {
+        if (node_type === "op" || node_type === "input") return "14px";
+        else return "8px";
+    }
+
+    node.append("ellipse")
+        .attr("rx", function (d) {
+            return shape_size(d.node_type)[0];
+        })
+        .attr("ry", function (d) {
+            return shape_size(d.node_type)[1];
+        })
+        .attr("fill", function (d) {
+            return color(d.node_type);
+        })
+    node.append("text")
+        .attr("font-size", function (d) {
+            return font_size(d.node_type);
+        })
+        .attr("dx", 60).attr("dy", 5).text(function (d) {
+        return d.name;
+    });
+    node.append("text")
+        .attr("font-size", function (d) {
+            return font_size(d.node_type);
+        })
+        .attr("dx", -25).attr("dy", 5).text(function (d) {
+        if (d.node_type === "op") return d.type;
+        else return "";
+    }).style("fill", "white");
+
+    var link = svg.append("g").attr("class", "links").selectAll("line")
+        .data(graph.links).enter().append("line")
+        .attr("marker-end", "url(#arrow)");
+
+
+    simulation.nodes(graph.nodes).on("tick", tick);
+    simulation.force("link").links(graph.links);
+    function tick() {
+        link.attr("x1", function (d) {
+            return d.source.x;
+        })
+            .attr("y1", function (d) {
+                return d.source.y;
+            })
+            .attr("x2", function (d) {
+                return d.target.x;
+            })
+            .attr("y2", function (d) {
+                return d.target.y;
+            });
+        node.attr("transform", function (d) {
+            return "translate(" + d.x + "," + d.y + ")";
+        });
+    }
+</script>
+
+</html>
