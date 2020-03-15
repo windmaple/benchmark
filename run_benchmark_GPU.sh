@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# does not work well
+
 # *** Python pkg requirements ***
 # yes | pip install pyyaml filelock
 # *** Python pkg requirements ***
@@ -36,16 +38,16 @@ MACE_MODEL_DIR="$MODEL_DIR/mace"
 # https://paddle-inference-dist.bj.bcebos.com/PaddleLite/benchmark_0/benchmark_models.tgz
 PADDLELITE_MODEL_DIR="$MODEL_DIR/paddle-lite"
 
-DO_TFLITE=true
-DO_MNN=true
-DO_NCNN=true
+DO_TFLITE=false
+DO_MNN=false
+DO_NCNN=false
 DO_MACE=true
-DO_PADDLELITE=true
+DO_PADDLELITE=false
 
 REUSE_BINARY=true
 
-MODELS="mobilenet_v1_1.0_224_quant mobilenet_v1_1.0_224 mobilenet_v2_1.0_224"
-RUN_THREADS=1
+MODELS="mobilenet_v1_1.0_224 mobilenet_v2_1.0_224"
+RUN_THREADS=4
 RUN_LOOP=50
 
 # Set up folder and etc.
@@ -91,18 +93,7 @@ then
     echo $i
     adb shell /data/local/tmp/benchmark_model \
     --graph=/data/local/tmp/$i.tflite \
-    --num_threads=$RUN_THREADS --num_runs=$RUN_LOOP > $TMP_DIR/tflite.log
-    grep 'Average inference timings in us' $TMP_DIR/tflite.log | awk '{print $NF/1000}' | tr '\n' ',' >> $OVERVIEW_LOG
-  done
-  echo >> $OVERVIEW_LOG
-
-  echo -n "TFLite-XNNPACK(`git rev-parse --short HEAD`),0," >> $OVERVIEW_LOG
-  for i in `echo $MODELS | sed s/mobilenet.*quant//g`; 
-  do
-    echo $i
-    adb shell /data/local/tmp/benchmark_model \
-    --graph=/data/local/tmp/$i.tflite \
-    --num_threads=$RUN_THREADS --num_runs=$RUN_LOOP --use_xnnpack=true > $TMP_DIR/tflite.log
+    --num_threads=$RUN_THREADS --num_runs=$RUN_LOOP --use_gpu=true > $TMP_DIR/tflite.log
     grep 'Average inference timings in us' $TMP_DIR/tflite.log | awk '{print $NF/1000}' | tr '\n' ',' >> $OVERVIEW_LOG
   done
   echo >> $OVERVIEW_LOG
@@ -129,10 +120,9 @@ then
     #git checkout 2326a763d63a63622fcc0974f219f50486a2d41e
   fi
   sed -i '.bak' s%^BENCHMARK_MODEL_DIR.*%BENCHMARK_MODEL_DIR=$MNN_MODEL_DIR%g bench_android.sh
-  sed -i '.bak' s%^ABI=.*%ABI=\"arm64-v8a\"%g bench_android.sh
-  sed -i '.bak' s%^VULKAN=.*%VULKAN=\"OFF\"%g bench_android.sh   
-  sed -i '.bak' s%^OPENCL=.*%OPENCL=\"OFF\"%g bench_android.sh
-  sed -i '.bak' s%^OPENGL=.*%OPENGL=\"OFF\"%g bench_android.sh
+  # sed -i '.bak' s%^VULKAN=.*%VULKAN=\"OFF\"%g bench_android.sh   
+  # sed -i '.bak' s%^OPENCL=.*%OPENCL=\"OFF\"%g bench_android.sh
+  # sed -i '.bak' s%^OPENGL=.*%OPENGL=\"OFF\"%g bench_android.sh
   sed -i '.bak' "s/\$RUN_LOOP\ \$FORWARD_TYPE/\$RUN_LOOP \$FORWARD_TYPE $RUN_THREADS/g" bench_android.sh
   sed -i '.bak' s%RUN_LOOP=.*%RUN_LOOP=$RUN_LOOP%g bench_android.sh
   #disable Vulkan runs
@@ -156,7 +146,7 @@ then
     git clone https://github.com/Tencent/ncnn.git $NCNN_ROOT
   fi 
   cd $NCNN_ROOT
-  if [ "$REUSE_BINARY" = "false" ] || [ ! -d $BENCHMARK_BINARY ]
+  if [ "$REUSE_BINARY" = "false" ]
   then
     git reset --hard
     git clean -xdf
@@ -165,16 +155,19 @@ then
     cp $SCRIPT_DIR/benchncnn.cpp benchmark/benchncnn.cpp
     mkdir -p build-android-aarch64
     cd build-android-aarch64
+    # VULKAN SDK required
+    export VULKAN_SDK=/Users/weiwe/Desktop/vulkansdk-macos-1.2.131.2/macOS
     cmake -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake \
         -DANDROID_ABI="arm64-v8a" \
-        -DANDROID_PLATFORM=android-21 .. 
+        -DANDROID_PLATFORM=android-24 -DNCNN_VULKAN=ON ..
     make -j8
   fi
   adb push $BENCHMARK_BINARY /data/local/tmp/
   adb push $NCNN_MODEL_DIR/*.param /data/local/tmp/
-  adb shell /data/local/tmp/benchncnn $RUN_LOOP $RUN_THREADS 2 -1 >& $TMP_DIR/ncnn.log
+  # 0 means GPU
+  adb shell /data/local/tmp/benchncnn $RUN_LOOP $RUN_THREADS 2 0 >& $TMP_DIR/ncnn.log
   echo -n "ncnn(`git rev-parse --short HEAD`)," >> $OVERVIEW_LOG
-  grep 'min.*max.*avg' $TMP_DIR/ncnn.log | awk '{print $NF}' | tr '\n' ',' >> $OVERVIEW_LOG
+  grep 'min.*max.*avg' $TMP_DIR/ncnn.log | tail -2 | awk '{print $NF}' | tr '\n' ',' >> $OVERVIEW_LOG
   echo >> $OVERVIEW_LOG
   BENCHMARK_BINARY=""
 fi
@@ -214,7 +207,7 @@ then
       --target_abi=arm64-v8a   \
       --omp_num_threads=$RUN_THREADS   \
       --round=$RUN_LOOP   \
-      --runtime=cpu > $TMP_DIR/mace.log
+      --runtime=gpu > $TMP_DIR/mace.log
     grep -A 4 "Summary of Ops' Stat" $TMP_DIR/mace.log | tail -1 | cut -d\| -f 7 | tr '\n' ',' >> $OVERVIEW_LOG
   done
   echo >> $OVERVIEW_LOG
